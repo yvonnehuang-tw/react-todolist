@@ -1,38 +1,159 @@
+:root {
+  /* --light-mode-background-color: rgba(43, 144, 217, 1);
+  --dark-mode-background-color: rgba(44, 54, 63, 1); */
+  --light-mode-background-color: rgba(17, 141, 240, 1);
+  --dark-mode-background-color: rgba(44, 54, 63, 1);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.header {
+  background-color: rgba(17, 141, 240, 1);
+  color: #fff;
+  flex-basis: 50px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+}
+
+.logo {
+  text-transform: uppercase;
+  margin: 10px;
+}
+
+.navigation {
+  display: flex;
+}
+
+.navigation li {
+  list-style: none;
+  margin: 10px;
+}
+
+a {
   color: white;
+  text-decoration: none;
 }
 
-.App-link {
-  color: #61dafb;
+a:hover {
+  color: rgba(44, 54, 63, 1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.light-background {
+  background-color: var(--light-mode-background-color);
+}
+
+.dark-background {
+  background-color: var(--dark-mode-background-color);
+}
+
+.dark-background a:hover {
+  color: rgba(17, 141, 240, 1);
+}
+
+.container {
+  background-color: rgba(237, 241, 242, 1);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.input-content {
+  margin-top: 50px;
+}
+
+.input-content>input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 300px;
+  height: 20px;
+}
+
+.input-content>button {
+  border: none;
+  background-color: rgba(44, 54, 63, 1);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-left: 25px;
+  cursor: pointer;
+}
+
+.input-content>button:hover {
+  background-color: rgba(17, 141, 240, 1);
+  color: #fff;
+}
+
+.list-content {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.list-content>span {
+  width: 300px;
+  height: 20px;
+  padding: 10px;
+  list-style: none;
+  border-bottom: 1.5px solid rgba(17, 141, 240, 1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.list-content>input {
+  width: 300px;
+  height: 20px;
+  padding: 10px;
+  list-style: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.list-content>button {
+  border: none;
+  background-color: rgba(44, 54, 63, 1);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-left: 28px;
+  cursor: pointer;
+}
+
+.list-content>button:hover {
+  background-color: rgba(255, 75, 104, 1);
+  color: #fff;
+}
+
+.error-message {
+  width: 290px;
+  background-color: rgba(255, 75, 104, 1);
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-radius: 50px;
+}
+
+.footer {
+  background-color: rgba(44, 54, 63, 1);
+  color: #fff;
+  flex-basis: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
