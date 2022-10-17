@@ -42,13 +42,8 @@ export default function TodoDemo() {
     setTodoList(newTodoList);
   };
 
-  const ErrorMessage = () => {
-    return (
-      errorMessage && (
-        <div className={styles.errorMessage}>Input is required.</div>
-      )
-    );
-  };
+  const ErrorMessage = () =>
+    errorMessage && <div className={styles.errorMessage}>Input is required.</div>;
 
   return (
     <>
@@ -67,10 +62,11 @@ export default function TodoDemo() {
         <CustomButton
           title="Add button"
           icon="icon-plus"
+          hoverBgColor={"rgba(17, 141, 240, 1)"}
           handleClick={handleAddBtn}
         />
       </div>
-      <div>
+      <div className={styles.listContent}>
         <ul>
           {todoList.map((list) => (
             <TodoListItem

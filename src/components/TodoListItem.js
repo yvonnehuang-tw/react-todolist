@@ -4,12 +4,6 @@ import CustomButton from "./CustomButton";
 export default function TodoListItem(props) {
   const { todoItem, todoList, changeTodoList } = props;
 
-  const handleClickDeleteBtn = () => {
-    console.log("Delete");
-    let newTodoList = todoList;
-    changeTodoList(newTodoList.filter((list) => list.id !== todoItem.id));
-  };
-
   const handleClickCheckDone = () => {
     let newTodoList = todoList;
     newTodoList.forEach((list) => {
@@ -20,8 +14,17 @@ export default function TodoListItem(props) {
     changeTodoList([...newTodoList]);
   };
 
+  const handleClickDeleteBtn = () => {
+    let newTodoList = todoList;
+    changeTodoList(newTodoList.filter((list) => list.id !== todoItem.id));
+  };
+
+  const handleClickEditBtn = () => {
+    console.log("edit");
+  };
+
   return (
-    <li className={styles.listContent}>
+    <li className={styles.itemContent}>
       <span
         style={{
           textDecorationLine: todoItem.status ? "line-through" : "none",
@@ -33,13 +36,15 @@ export default function TodoListItem(props) {
       <CustomButton
         title={"Delete button"}
         icon={"icon-trash"}
+        hoverBgColor={"rgba(255, 75, 104, 1)"}
         handleClick={handleClickDeleteBtn}
       />
-      {/* <CustomButton
+      <CustomButton
         title={"Edit button"}
         icon={"icon-pencil"}
+        hoverBgColor={"rgba(0 , 150, 136, 1"}
         handleClick={handleClickEditBtn}
-      /> */}
+      />
     </li>
   );
 }
