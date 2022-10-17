@@ -1,145 +1,86 @@
+import styles from "../styles/Todo.module.css";
 import { useState } from "react";
-// import TodoInput from "./TodoInput";
+import CustomButton from "./CustomButton";
+import TodoListItem from "./TodoListItem";
 
 let nextId = 0;
-
 export default function TodoDemo() {
-  const [inputValue, setInputValue] = useState("");
-  const [todolist, setTodolist] = useState([]);
+  const [todoInputValue, setTodoInputValue] = useState("");
+  const [todoList, setTodoList] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const add = (e) => {
-    if (e.type === "click" || e.key === "Enter") {
-      if (inputValue.trim() === "") {
+  const handleChangeTodo = (event) => {
+    setTodoInputValue(event.target.value);
+  };
+
+  const handleAddBtn = (event) => {
+    let tmpTodo = todoInputValue;
+    // let tmpTodoList = todoList;
+    if (event.type === "click" || event.key === "Enter") {
+      if (tmpTodo.trim() === "") {
         setErrorMessage(true);
       } else {
-        todolist.push({
+        // tmpTodoList.push({
+        //   id: nextId++,
+        //   value: tmpTodo,
+        //   status: false,
+        // });
+        let newTodo = {
           id: nextId++,
-          value: inputValue,
+          value: tmpTodo,
           status: false,
-        });
+        };
         setErrorMessage(false);
-        setInputValue("");
+        // setTodoList(tmpTodoList);
+        setTodoList([...todoList, newTodo]);
+        setTodoInputValue("");
       }
     }
   };
 
-  const deleteItem = (id) => {
-    setTodolist(todolist.filter((list) => list.id !== id));
+  const changeTodoList = (newTodoList) => {
+    setTodoList(newTodoList);
   };
-
-  // const editItem = (id) => {
-  //   console.log(id);
-  // };
-
-  const checkedListDone = (item) => {
-    todolist.forEach((list) => {
-      if (list.id === item.id) {
-        list.status = !list.status;
-      }
-      setTodolist([...todolist]);
-    });
-  };
-
-  const TodolistButton = ({ title, icon, list, handleClick }) => {
-    return (
-      <button type="button" title={title} onClick={() => handleClick(list.id)}>
-        <i className={icon}></i>
-      </button>
-    );
-  };
-
-  const TodolistItems = () => (
-    <ul>
-      {todolist.length > 0 ? (
-        todolist.map((list) => (
-          <li className="list-content" key={list.id}>
-            <span
-              style={{
-                textDecorationLine: list.status ? "line-through" : "none",
-              }}
-              onClick={() => checkedListDone(list)}
-            >
-              {list.value}
-            </span>
-            <TodolistButton
-              title={"Delete button"}
-              icon={"icon-trash"}
-              list={list}
-              handleClick={deleteItem}
-            />
-            {/* <TodolistButton
-              title={"Edit button"}
-              icon={"icon-pencil"}
-              list={list}
-              handleClick={editItem}
-            /> */}
-          </li>
-        ))
-      ) : (
-        <></>
-      )}
-    </ul>
-  );
 
   const ErrorMessage = () => {
     return (
-      errorMessage && <div className="error-message">Input is required.</div>
+      errorMessage && (
+        <div className={styles.errorMessage}>Input is required.</div>
+      )
     );
   };
-
-  const todoInput = () => (
-    <div
-      className="input-content"
-      style={{ marginTop: errorMessage ? 20 : 50 }}
-    >
-      <input
-        type="text"
-        placeholder="Enter a todo..."
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyUp={add}
-        // ref={(input) => {
-        //   if (input) {
-        //     input.focus();
-        //   }
-        // }}
-      />
-      <button type="button" title="Add button" onClick={add}>
-        <i className="icon-plus"></i>
-      </button>
-    </div>
-  );
 
   return (
     <>
       <ErrorMessage />
-      {/* <div
-        className="input-content"
+      <div
+        className={styles.inputContent}
         style={{ marginTop: errorMessage ? 20 : 50 }}
       >
         <input
           type="text"
           placeholder="Enter a todo..."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyUp={add}
+          value={todoInputValue}
+          onChange={handleChangeTodo}
+          onKeyUp={handleAddBtn}
         />
-        <button type="button" title="Add button" onClick={add}>
-          <i className="icon-plus"></i>
-        </button>
-      </div> */}
-      {todoInput()}
-      {/* <TodoInput
-        inputValue={inputValue}
-        errorMessage={errorMessage}
-        value={inputValue}
-        changeEvent={(e) => setInputValue(e.target.value)}
-        add={add}
-      /> */}
-      <br />
+        <CustomButton
+          title="Add button"
+          icon="icon-plus"
+          handleClick={handleAddBtn}
+        />
+      </div>
       <div>
-        <TodolistItems />
+        <ul>
+          {todoList.map((list) => (
+            <TodoListItem
+              key={list.id}
+              todoItem={list}
+              todoList={todoList}
+              changeTodoList={changeTodoList}
+            />
+          ))}
+        </ul>
       </div>
     </>
   );

@@ -26,7 +26,7 @@ const Header = () => {
 
   const [defaultMode, setDefaultMode] = useState("light-background");
 
-  const clickHandler = (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
     if (e.target.className === "icon-adjust") {
       // Change dark/light theme
@@ -46,7 +46,7 @@ const Header = () => {
           {NAVLIST.map((list) => {
             return (
               <li key={list.icon}>
-                <a href={list.url} onClick={clickHandler}>
+                <a href={list.url} onClick={handleClick}>
                   <i className={list.icon}></i>
                 </a>
               </li>
