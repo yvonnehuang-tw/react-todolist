@@ -2,19 +2,12 @@ import { useState } from "react";
 
 export default function CustomButton(props) {
   const { title, bgColor, hoverBgColor, color, icon, name, handleClick } = props;
+
   const [isHover, setIsHover] = useState(false);
+
   const tmpBgColor = bgColor ? bgColor : "rgba(44, 54, 63, 1)";
   const tmpHoverBgColor = hoverBgColor ? hoverBgColor : "rgba(44, 54, 63, 1)";
   const tmpColor = color ? color : "#ffffff";
-
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
-
   const btnStyle = {
     border: "none",
     padding: "10px 15px",
@@ -23,6 +16,14 @@ export default function CustomButton(props) {
     cursor: "pointer",
     backgroundColor: isHover ? tmpHoverBgColor : tmpBgColor,
     color: tmpColor,
+  };
+
+  const handleMouseEnter = () => {
+    setIsHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHover(false);
   };
 
   return (

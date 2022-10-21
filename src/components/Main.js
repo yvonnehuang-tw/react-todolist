@@ -1,4 +1,4 @@
-import TodoDemo from "./TodoDemo";
+import TodoDemo from "./todo/TodoDemo";
 
 export default function Main() {
   return (
