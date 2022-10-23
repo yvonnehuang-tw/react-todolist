@@ -37,7 +37,7 @@ export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
         title="Add button"
         icon="icon-plus"
         hoverBgColor={"rgba(17, 141, 240, 1)"}
-        handleClick={(e) => handleClickAddBtn(e)}
+        onClick={(e) => handleClickAddBtn(e)}
       />
     </div>
   );

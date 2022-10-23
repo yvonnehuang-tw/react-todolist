@@ -2,11 +2,14 @@ import styles from "../../styles/Todo.module.css";
 import { useState } from "react";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
+import EditTodoModal from "./EditTodoModal";
 
 let nextId = 0;
 export default function TodoDemo() {
   const [todos, setTodos] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorMessageShow, setErrorMessageShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
+  const [todoContent, setTodoContent] = useState({});
 
   // Add
   function handleAddTodo(inputValue) {
@@ -20,8 +23,28 @@ export default function TodoDemo() {
     ]);
   }
 
+  const handleCloseEditModal = () => {
+    setEditModalShow(false);
+  };
+
+  const handleSaveChangeTodo = () => {
+    setTodos(
+      todos.map((tmpTodo) => {
+        if (tmpTodo.id === todoContent.id) {
+          return todoContent;
+        } else {
+          return tmpTodo;
+        }
+      })
+    );
+    setEditModalShow(false);
+  };
+
   // Edit
-  function handleEditTodo() {}
+  function handleOpenEditModal(tmpTodo) {
+    setTodoContent(tmpTodo);
+    setEditModalShow(true);
+  }
 
   // Delete
   function handleDeleteTodo(todoId) {
@@ -42,21 +65,30 @@ export default function TodoDemo() {
   }
 
   const ErrorMessage = () =>
-    errorMessage && <div className={styles.errorMessage}>Input is required.</div>;
+    errorMessageShow && (
+      <div className={styles.errorMessage}>Input is required.</div>
+    );
 
   return (
     <>
       <ErrorMessage />
       <AddTodo
         onAddTodo={handleAddTodo}
-        onErrorMessage={setErrorMessage}
-        errorMessage={errorMessage}
+        onErrorMessage={setErrorMessageShow}
+        errorMessage={errorMessageShow}
       />
       <TodoList
         todos={todos}
         onClickDoneTodo={handleChangeTodo}
-        onEditTodo={handleEditTodo}
+        onOpenEditModal={(tmpTodo) => handleOpenEditModal(tmpTodo)}
         onDeleteTodo={handleDeleteTodo}
+      />
+      <EditTodoModal
+        todoContent={todoContent}
+        editModalShow={editModalShow}
+        onChangeTodo={setTodoContent}
+        onCloseEditModal={handleCloseEditModal}
+        onSaveChangeTodo={handleSaveChangeTodo}
       />
     </>
   );

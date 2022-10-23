@@ -1,13 +1,18 @@
 import CustomButton from "../common/CustomButton";
 
-export default function TodoItem({ todo, onClickDone, onEdit, onDelete }) {
+export default function TodoItem({
+  todo,
+  onClickDoneTodo,
+  onOpenEditModal,
+  onDeleteTodo,
+}) {
   return (
     <>
       <span
         style={{
           textDecorationLine: todo.done ? "line-through" : "none",
         }}
-        onClick={() => onClickDone({ ...todo, done: !todo.done })}
+        onClick={() => onClickDoneTodo({ ...todo, done: !todo.done })}
       >
         {todo.value}
       </span>
@@ -15,13 +20,13 @@ export default function TodoItem({ todo, onClickDone, onEdit, onDelete }) {
         title={"Edit button"}
         icon={"icon-pencil"}
         hoverBgColor={"rgba(0 , 150, 136, 1"}
-        handleClick={(e) => onEdit()}
+        onClick={() => onOpenEditModal(todo)}
       />
       <CustomButton
         title={"Delete button"}
         icon={"icon-trash"}
         hoverBgColor={"rgba(255, 75, 104, 1)"}
-        handleClick={() => onDelete(todo.id)}
+        onClick={() => onDeleteTodo(todo.id)}
       />
     </>
   );

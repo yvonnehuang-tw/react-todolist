@@ -4,7 +4,7 @@ import TodoItem from "./TodoItem";
 export default function TodoList({
   todos,
   onClickDoneTodo,
-  onEditTodo,
+  onOpenEditModal,
   onDeleteTodo,
 }) {
   return (
@@ -14,9 +14,9 @@ export default function TodoList({
           <li className={styles.itemContent} key={todo.id}>
             <TodoItem
               todo={todo}
-              onClickDone={onClickDoneTodo}
-              onEdit={onEditTodo}
-              onDelete={onDeleteTodo}
+              onClickDoneTodo={onClickDoneTodo}
+              onOpenEditModal={onOpenEditModal}
+              onDeleteTodo={onDeleteTodo}
             />
           </li>
         ))}
