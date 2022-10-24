@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const NAVLIST = [
     {
-      url: "#",
+      url: "todolist",
       icon: "icon-list-ul",
+    },
+    {
+      url: "table",
+      icon: "icon-table",
     },
     // {
     //   url: "#",
@@ -18,10 +23,6 @@ const Header = () => {
     //   url: "#",
     //   icon: "icon-shopping-cart",
     // },
-    {
-      url: "",
-      icon: "icon-adjust",
-    },
   ];
 
   const [defaultMode, setDefaultMode] = useState("light-background");
@@ -46,12 +47,17 @@ const Header = () => {
           {NAVLIST.map((list) => {
             return (
               <li key={list.icon}>
-                <a href={list.url} onClick={handleClick}>
+                <Link to={list.url}>
                   <i className={list.icon}></i>
-                </a>
+                </Link>
               </li>
             );
           })}
+          <li>
+            <a href="#/" style={{ cursor: "pointer" }} onClick={handleClick}>
+              <i className="icon-adjust"></i>
+            </a>
+          </li>
         </ul>
       </nav>
     </header>

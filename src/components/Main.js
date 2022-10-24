@@ -1,9 +1,9 @@
-import TodoDemo from "./todo/TodoDemo";
+import { Outlet } from "react-router-dom";
 
 export default function Main() {
   return (
     <main className="main">
-      <TodoDemo />
+      <Outlet />
     </main>
   );
 }

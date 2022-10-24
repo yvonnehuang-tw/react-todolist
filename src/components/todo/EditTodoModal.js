@@ -28,7 +28,12 @@ export default function EditTodoModal({
         <p>Please enter to change your todo.</p>
         <input
           type="text"
-          style={{ width: 465 }}
+          style={{
+            width: 465,
+            padding: 10,
+            border: "1px solid #ddd",
+            borderRadius: 6,
+          }}
           value={todoContent.value}
           onChange={(e) => handleChangeTodo(e.target.value)}
         />

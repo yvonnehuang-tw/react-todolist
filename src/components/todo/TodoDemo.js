@@ -70,7 +70,7 @@ export default function TodoDemo() {
     );
 
   return (
-    <>
+    <div className={styles.todolistContainer}>
       <ErrorMessage />
       <AddTodo
         onAddTodo={handleAddTodo}
@@ -90,6 +90,6 @@ export default function TodoDemo() {
         onCloseEditModal={handleCloseEditModal}
         onSaveChangeTodo={handleSaveChangeTodo}
       />
-    </>
+    </div>
   );
 }
