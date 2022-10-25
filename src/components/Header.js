@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
+let title = "Demo";
 const Header = () => {
   const NAVLIST = [
     {
       url: "todolist",
       icon: "icon-list-ul",
+      name: "TodoList",
     },
     {
       url: "table",
       icon: "icon-table",
+      name: "Table",
     },
     // {
     //   url: "#",
@@ -25,12 +28,21 @@ const Header = () => {
     // },
   ];
 
-  const [defaultMode, setDefaultMode] = useState("light-background");
+  const location = useLocation();
+  if (location && location.pathname) {
+    if (location.pathname.slice(1) === "todolist") {
+      title = "todolist";
+    } else if (location.pathname.slice(1) === "table") {
+      title = "table";
+    }
+  }
 
-  const handleClick = (e) => {
+  const [defaultMode, setDefaultMode] = useState("light-background");
+  const [headerName, setHeaderName] = useState(title);
+
+  const handleClickChangeTheme = (e) => {
     e.preventDefault();
     if (e.target.className === "icon-adjust") {
-      // Change dark/light theme
       if (defaultMode === "light-background") {
         setDefaultMode("dark-background");
       } else {
@@ -41,20 +53,24 @@ const Header = () => {
 
   return (
     <header className={`header ${defaultMode}`}>
-      <h4 className="logo">Todolist</h4>
+      <h4 className="logo">{headerName}</h4>
       <nav>
         <ul className="navigation">
           {NAVLIST.map((list) => {
             return (
               <li key={list.icon}>
-                <Link to={list.url}>
+                <Link to={list.url} onClick={() => setHeaderName(list.name)}>
                   <i className={list.icon}></i>
                 </Link>
               </li>
             );
           })}
           <li>
-            <a href="#/" style={{ cursor: "pointer" }} onClick={handleClick}>
+            <a
+              href="#/"
+              style={{ cursor: "pointer" }}
+              onClick={handleClickChangeTheme}
+            >
               <i className="icon-adjust"></i>
             </a>
           </li>

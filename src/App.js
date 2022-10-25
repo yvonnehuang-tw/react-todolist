@@ -19,6 +19,7 @@ function App() {
         {
           path: "table",
           element: <TableDemo />,
+          errorElement: <div>Oops! There was an error.</div>,
         },
       ],
     },
