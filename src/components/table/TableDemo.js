@@ -8,14 +8,18 @@ export default function TableDemo() {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8888/user")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    async function getUserData() {
+      try {
+        const response = await fetch("http://localhost:8888/user");
+        const data = await response.json();
         setUserData(data);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((e) => console.error(e));
+      }
+    }
+    getUserData();
   }, []);
 
   return (
