@@ -4,6 +4,7 @@
       "firstName": "Yvonne",
       "lastName": "Huang",
       "country": "TW",
+      "address": "No. 289, Xinhu 3rd Rd., Neihu Dist., Taipei City",
       "job": "QA Engineer",
       "id": 0
     },
@@ -11,6 +12,7 @@
       "firstName": "Frank",
       "lastName": "Chen",
       "country": "JP",
+      "address": "No. 123, Yiwen St., Banqiao Dist., New Taipei City",
       "job": "Java Engineer",
       "id": 1
     },
@@ -18,6 +20,7 @@
       "firstName": "Yun",
       "lastName": "Yu",
       "country": "US",
+      "address": "No. 123, Jiantan Rd., Shilin Dist., Taipei City",
       "job": "Front-End Engineer",
       "id": 2
     }

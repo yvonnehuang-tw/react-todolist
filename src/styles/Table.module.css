@@ -24,6 +24,8 @@
 }
 
 .toolbarBoxRight>input {
-  padding-left: 5px;
+  padding-left: 10px;
+  border-width: 1px;
+  border-radius: 30px;
   font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
 }

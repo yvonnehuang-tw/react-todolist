@@ -2,10 +2,15 @@ import styles from "../../styles/Table.module.css";
 import { Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import UserTable from "./UserTable";
+import AddUserModal from "./AddUserModal";
+import DeleteUserModal from "./DeleteUserModal";
 
 export default function TableDemo() {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState([]);
+  const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
+  const [addModalShow, setAddModalShow] = useState(false);
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
 
   useEffect(() => {
     async function getUserData() {
@@ -22,15 +27,58 @@ export default function TableDemo() {
     getUserData();
   }, []);
 
+  function handleClickAddBtn() {
+    setAddModalShow(true);
+  }
+
+  function handleClickDeleteBtn() {
+    setDeleteModalShow(true);
+  }
+
+  const handleCloseBtn = (key) => {
+    switch (key) {
+      case "add":
+        setAddModalShow(false);
+        break;
+      case "delete":
+        setDeleteModalShow(false);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleAddSaveBtn = () => {
+    setAddModalShow(false);
+  };
+
+  const handleDeleteSaveBtn = () => {
+    setDeleteModalShow(false);
+  };
+
   return (
     <div className={styles.tableContainer}>
-      <h3>User info</h3>
+      {loading && (
+        <div className="loading-content">
+          <Spinner animation="border" className="loading-size">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      )}
+
+      <h3>User Info</h3>
       <hr className="forHR" />
 
       <div className={styles.toolbarBox}>
         <div className={styles.toolbarBoxLeft}>
-          <Button variant="outline-primary">Add</Button>
-          <Button variant="outline-secondary" disabled>
+          <Button variant="primary" onClick={handleClickAddBtn}>
+            Add
+          </Button>
+          <Button
+            variant="outline-secondary"
+            onClick={handleClickDeleteBtn}
+            disabled={deleteBtnDisable}
+          >
             Delete
           </Button>
         </div>
@@ -41,13 +89,17 @@ export default function TableDemo() {
 
       <UserTable userData={userData} />
 
-      {loading && (
-        <div className="loading-content">
-          <Spinner animation="border" className="loading-size">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </div>
-      )}
+      <AddUserModal
+        modalShow={addModalShow}
+        onCloseBtn={() => handleCloseBtn("add")}
+        onSaveBtn={handleAddSaveBtn}
+      />
+
+      <DeleteUserModal
+        modalShow={deleteModalShow}
+        onCloseBtn={() => handleCloseBtn("delete")}
+        onSaveBtn={handleDeleteSaveBtn}
+      />
     </div>
   );
 }

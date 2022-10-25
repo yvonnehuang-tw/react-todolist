@@ -11,6 +11,7 @@ export default function UserTable({ userData }) {
           <th style={{ width: 40, textAlign: "center" }}>#</th>
           <th>Name</th>
           <th>Country</th>
+          <th>Address</th>
           <th>Job</th>
         </tr>
       </thead>
@@ -24,6 +25,7 @@ export default function UserTable({ userData }) {
               <td style={{ width: 40, textAlign: "center" }}>{user.id + 1}</td>
               <td>{`${user.firstName} ${user.lastName}`}</td>
               <td>{user.country}</td>
+              <td>{user.address}</td>
               <td>{user.job}</td>
             </tr>
           );
