@@ -8,15 +8,16 @@ import DeleteUserModal from "./DeleteUserModal";
 export default function TableDemo() {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState([]);
-  const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
   const [addModalShow, setAddModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
+  const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
   useEffect(() => {
     async function getUserData() {
       try {
         const response = await fetch("http://localhost:8888/user");
         const data = await response.json();
+        data.map((item) => (item.checked = false));
         setUserData(data);
       } catch (error) {
         console.error("Error:", error);
@@ -26,6 +27,28 @@ export default function TableDemo() {
     }
     getUserData();
   }, []);
+
+  function handleTableCheckedAll(tmpChecked) {
+    userData.map((item) => (item.checked = tmpChecked));
+    setUserData(userData);
+
+    if (tmpChecked) {
+      setDeleteBtnDisable(false);
+    } else {
+      setDeleteBtnDisable(true);
+    }
+  }
+
+  function handleChangeDeleteBtnDisable(tmpUserData) {
+    setUserData(tmpUserData);
+
+    let hasCheckedData = tmpUserData.filter((data) => data.checked);
+    if (hasCheckedData.length > 0) {
+      setDeleteBtnDisable(false);
+    } else {
+      setDeleteBtnDisable(true);
+    }
+  }
 
   function handleClickAddBtn() {
     setAddModalShow(true);
@@ -75,7 +98,7 @@ export default function TableDemo() {
             Add
           </Button>
           <Button
-            variant="outline-secondary"
+            variant="secondary"
             onClick={handleClickDeleteBtn}
             disabled={deleteBtnDisable}
           >
@@ -87,7 +110,11 @@ export default function TableDemo() {
         </div>
       </div>
 
-      <UserTable userData={userData} />
+      <UserTable
+        userData={userData}
+        onTableCheckedAll={handleTableCheckedAll}
+        onChangeDeleteBtnDisable={handleChangeDeleteBtnDisable}
+      />
 
       <AddUserModal
         modalShow={addModalShow}
