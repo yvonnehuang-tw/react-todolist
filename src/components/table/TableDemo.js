@@ -13,20 +13,21 @@ export default function TableDemo() {
   const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
   useEffect(() => {
-    async function getUserData() {
-      try {
-        const response = await fetch("http://localhost:8888/user");
-        const data = await response.json();
-        data.map((item) => (item.checked = false));
-        setUserData(data);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
     getUserData();
   }, []);
+
+  async function getUserData() {
+    try {
+      const response = await fetch("http://localhost:8888/user");
+      const data = await response.json();
+      data.map((item) => (item.checked = false));
+      setUserData(data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   function handleTableCheckedAll(tmpChecked) {
     userData.map((item) => (item.checked = tmpChecked));

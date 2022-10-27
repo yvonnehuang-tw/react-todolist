@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 let title = "Demo";
+let theme = localStorage.getItem("theme") || "light-background";
 const Header = () => {
   const NAVLIST = [
     {
@@ -37,7 +38,7 @@ const Header = () => {
     }
   }
 
-  const [defaultMode, setDefaultMode] = useState("light-background");
+  const [defaultMode, setDefaultMode] = useState(theme);
   const [headerName, setHeaderName] = useState(title);
 
   const handleClickChangeTheme = (e) => {
@@ -45,8 +46,10 @@ const Header = () => {
     if (e.target.className === "icon-adjust") {
       if (defaultMode === "light-background") {
         setDefaultMode("dark-background");
+        localStorage.setItem("theme", "dark-background");
       } else {
         setDefaultMode("light-background");
+        localStorage.setItem("theme", "light-background");
       }
     }
   };
