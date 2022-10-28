@@ -14,7 +14,7 @@ export default function UserTable({
   };
 
   const handleTableChecked = (tmpUser) => {
-    let isUserData = userData.map((user) => {
+    const isUserData = userData.map((user) => {
       if (user.id === tmpUser.id) {
         return tmpUser;
       } else {

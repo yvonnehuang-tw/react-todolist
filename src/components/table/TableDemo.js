@@ -20,8 +20,10 @@ export default function TableDemo() {
     try {
       const response = await fetch("http://localhost:8888/user");
       const data = await response.json();
-      data.map((item) => (item.checked = false));
-      setUserData(data);
+      const tmpData = data.map((item) => {
+        return { ...item, checked: false };
+      });
+      setUserData(tmpData);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -30,8 +32,10 @@ export default function TableDemo() {
   }
 
   function handleTableCheckedAll(tmpChecked) {
-    userData.map((item) => (item.checked = tmpChecked));
-    setUserData(userData);
+    const tmpUserData = userData.map((item) => {
+      return { ...item, checked: tmpChecked };
+    });
+    setUserData(tmpUserData);
 
     if (tmpChecked) {
       setDeleteBtnDisable(false);
@@ -43,7 +47,7 @@ export default function TableDemo() {
   function handleChangeDeleteBtnDisable(tmpUserData) {
     setUserData(tmpUserData);
 
-    let hasCheckedData = tmpUserData.filter((data) => data.checked);
+    const hasCheckedData = tmpUserData.filter((data) => data.checked);
     if (hasCheckedData.length > 0) {
       setDeleteBtnDisable(false);
     } else {
