@@ -1,9 +1,10 @@
 import styles from "../../styles/Table.module.css";
-import { Button, Spinner } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import UserTable from "./UserTable";
 import AddUserModal from "./AddUserModal";
 import DeleteUserModal from "./DeleteUserModal";
+import Loading from "../common/Loading";
 
 export default function TableDemo() {
   const [loading, setLoading] = useState(true);
@@ -48,11 +49,7 @@ export default function TableDemo() {
     setUserData(tmpUserData);
 
     const hasCheckedData = tmpUserData.filter((data) => data.checked);
-    if (hasCheckedData.length > 0) {
-      setDeleteBtnDisable(false);
-    } else {
-      setDeleteBtnDisable(true);
-    }
+    setDeleteBtnDisable(hasCheckedData.length > 0 ? false : true);
   }
 
   function handleClickAddBtn() {
@@ -86,13 +83,7 @@ export default function TableDemo() {
 
   return (
     <div className={styles.tableContainer}>
-      {loading && (
-        <div className="loading-content">
-          <Spinner animation="border" className="loading-size">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </div>
-      )}
+      {loading && <Loading />}
 
       <h3>User Info</h3>
       <hr className="forHR" />
