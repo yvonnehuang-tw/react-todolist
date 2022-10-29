@@ -1,20 +1,32 @@
 import styles from "../../styles/Table.module.css";
 import { Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useReducer, useRef } from "react";
+import reducer from "../../reducer/reducer";
+
+import Loading from "../common/Loading";
 import UserTable from "./UserTable";
 import AddUserModal from "./AddUserModal";
 import DeleteUserModal from "./DeleteUserModal";
-import Loading from "../common/Loading";
 
 export default function TableDemo() {
-  const [loading, setLoading] = useState(true);
+  const ref = useRef(false);
+
+  // const [loading, setLoading] = useState(true);
+  const [loading, dispatch] = useReducer(reducer, { status: true });
+
   const [userData, setUserData] = useState([]);
   const [addModalShow, setAddModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
   useEffect(() => {
-    getUserData();
+    if (ref.current) {
+      getUserData();
+    }
+    return () => {
+      ref.current = true;
+    };
   }, []);
 
   async function getUserData() {
@@ -28,7 +40,8 @@ export default function TableDemo() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false);
+      // setLoading(false);
+      dispatch({ type: "IS_LOADING", loading: false });
     }
   }
 
@@ -37,12 +50,7 @@ export default function TableDemo() {
       return { ...item, checked: tmpChecked };
     });
     setUserData(tmpUserData);
-
-    if (tmpChecked) {
-      setDeleteBtnDisable(false);
-    } else {
-      setDeleteBtnDisable(true);
-    }
+    setDeleteBtnDisable(tmpChecked ? false : true);
   }
 
   function handleChangeDeleteBtnDisable(tmpUserData) {
@@ -83,7 +91,7 @@ export default function TableDemo() {
 
   return (
     <div className={styles.tableContainer}>
-      {loading && <Loading />}
+      {loading.status && <Loading />}
 
       <h3>User Info</h3>
       <hr className="forHR" />
