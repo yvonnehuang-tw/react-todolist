@@ -109,14 +109,15 @@ export default function TableDemo() {
     if (inputText === "") {
       setUserData(originUserData);
     } else {
+      const regExpInputText = new RegExp(inputText, "g");
       const filteredData = originUserData.filter((data) => {
         const tmpName = `${data.firstName} ${data.lastName}`;
         return (
-          tmpName.toLowerCase().match(new RegExp(inputText, "g")) ||
-          data.email.toLowerCase().match(new RegExp(inputText, "g")) ||
-          data.job.toLowerCase().match(new RegExp(inputText, "g")) ||
-          data.address.toLowerCase().match(new RegExp(inputText, "g")) ||
-          data.country.toLowerCase().match(new RegExp(inputText, "g"))
+          tmpName.toLowerCase().match(regExpInputText) ||
+          data.email.toLowerCase().match(regExpInputText) ||
+          data.job.toLowerCase().match(regExpInputText) ||
+          data.address.toLowerCase().match(regExpInputText) ||
+          data.country.toLowerCase().match(regExpInputText)
         );
       });
       setUserData(filteredData);
