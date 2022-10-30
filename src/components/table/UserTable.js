@@ -44,9 +44,10 @@ export default function UserTable({
           </th>
           <th style={{ width: 40, textAlign: "center" }}>#</th>
           <th>Name</th>
-          <th>Country</th>
-          <th>Address</th>
+          <th>E-mail</th>
           <th>Job</th>
+          <th>Address</th>
+          <th>Country</th>
         </tr>
       </thead>
       <tbody>
@@ -64,9 +65,10 @@ export default function UserTable({
               </td>
               <td style={{ width: 40, textAlign: "center" }}>{user.id}</td>
               <td>{`${user.firstName} ${user.lastName}`}</td>
-              <td>{user.country}</td>
-              <td>{user.address}</td>
+              <td>{user.email}</td>
               <td>{user.job}</td>
+              <td>{user.address}</td>
+              <td>{user.country}</td>
             </tr>
           );
         })}

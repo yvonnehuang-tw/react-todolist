@@ -1,11 +1,8 @@
-const initialState = {
-  status: true,
-};
-
-const reducer = (state = initialState, action) => {
+const reducer = (state, action) => {
   if (action.type === "IS_LOADING") {
-    return { status: !state };
+    return { status: action.nextLoading };
   }
+  throw Error("Unknown action: " + action.type);
 };
 
 export default reducer;

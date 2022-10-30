@@ -1,12 +1,31 @@
 {
   "user": [
     {
-      "firstName": "Dominic",
-      "lastName": "Pouros",
-      "country": "Zambia",
-      "address": "545 Jast Heights",
-      "job": "Internal Branding Developer",
+      "firstName": "Levi",
+      "lastName": "Cruickshank",
+      "email": "Edward_Bernier@gmail.com",
+      "job": "Chief Research Engineer",
+      "address": "2726 Batz Extensions",
+      "country": "Turkey",
       "id": 1
+    },
+    {
+      "firstName": "Nils",
+      "lastName": "Morar",
+      "email": "Carlo_Ondricka@yahoo.com",
+      "job": "Dynamic Directives Orchestrator",
+      "address": "58919 Schroeder Extension",
+      "country": "Saint Vincent and the Grenadines",
+      "id": 2
+    },
+    {
+      "firstName": "Irma",
+      "lastName": "Reichert",
+      "email": "Ottilie_Kunze43@gmail.com",
+      "job": "Investor Integration Officer",
+      "address": "855 Landen Loaf",
+      "country": "Kuwait",
+      "id": 3
     }
   ]
 }

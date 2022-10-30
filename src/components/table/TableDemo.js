@@ -1,9 +1,9 @@
 import styles from "../../styles/Table.module.css";
 import { Button } from "react-bootstrap";
 
-import { useEffect, useState, useRef } from "react";
 // import { useEffect, useState, useReducer, useRef } from "react";
-// import reducer from "../../reducer/reducer";
+import { useEffect, useState, useReducer } from "react";
+import reducer from "../../reducer/reducer";
 
 import Loading from "../common/Loading";
 import UserTable from "./UserTable";
@@ -11,27 +11,33 @@ import AddUserModal from "./AddUserModal";
 import DeleteUserModal from "./DeleteUserModal";
 
 export default function TableDemo() {
-  const ref = useRef(false);
+  // const ref = useRef(false);
 
-  const [loading, setLoading] = useState(true);
-  // const [loading, dispatch] = useReducer(reducer, { status: true });
+  // const [loading, setLoading] = useState(false);
+  const [loading, dispatch] = useReducer(reducer, { status: false });
 
   const [userData, setUserData] = useState([]);
+  const [inputText, setInputText] = useState("");
+  const [originUserData, setOriginUserData] = useState([]);
+
   const [addModalShow, setAddModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
   useEffect(() => {
-    if (ref.current) {
-      getUserData();
-    }
-    return () => {
-      ref.current = true;
-    };
+    // if (ref.current) {
+    //   getUserData();
+    // }
+    // return () => {
+    //   ref.current = true;
+    // };
+    getUserData();
   }, []);
 
   async function getUserData() {
     try {
+      // setLoading(true);
+      dispatch({ type: "IS_LOADING", nextLoading: true });
       const response = await fetch("http://localhost:8888/user");
       const data = await response.json();
       const tmpData = data.map((item) => {
@@ -41,14 +47,15 @@ export default function TableDemo() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false);
-      // dispatch({ type: "IS_LOADING", loading: false });
+      // setLoading(false);
+      dispatch({ type: "IS_LOADING", nextLoading: false });
     }
   }
 
   async function removeUserData(isRemoveId) {
     try {
-      setLoading(true);
+      // setLoading(true);
+      dispatch({ type: "IS_LOADING", nextLoading: true });
       await fetch(`http://localhost:8888/user/${isRemoveId}`, {
         method: "DELETE",
       });
@@ -56,8 +63,8 @@ export default function TableDemo() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false);
-      // dispatch({ type: "IS_LOADING", loading: false });
+      // setLoading(false);
+      dispatch({ type: "IS_LOADING", nextLoading: false });
     }
   }
 
@@ -82,6 +89,32 @@ export default function TableDemo() {
 
   function handleClickDeleteBtn() {
     setDeleteModalShow(true);
+  }
+
+  function handleSearchData(e) {
+    setInputText(e.target.value.toLowerCase());
+    if (e.code === "Enter" && inputText === "") {
+      return;
+    }
+    if (originUserData.length === 0) {
+      setOriginUserData(userData);
+    }
+
+    if (inputText === "") {
+      setUserData(originUserData);
+    } else {
+      const filteredData = originUserData.filter((data) => {
+        const tmpName = `${data.firstName} ${data.lastName}`;
+        return (
+          tmpName.toLowerCase().match(new RegExp(inputText, "g")) ||
+          data.email.toLowerCase().match(new RegExp(inputText, "g")) ||
+          data.job.toLowerCase().match(new RegExp(inputText, "g")) ||
+          data.address.toLowerCase().match(new RegExp(inputText, "g")) ||
+          data.country.toLowerCase().match(new RegExp(inputText, "g"))
+        );
+      });
+      setUserData(filteredData);
+    }
   }
 
   const handleCloseBtn = (key) => {
@@ -111,8 +144,8 @@ export default function TableDemo() {
 
   return (
     <div className={styles.tableContainer}>
-      {loading && <Loading />}
-      {/* {loading.status && <Loading />} */}
+      {/* {loading && <Loading />} */}
+      {loading.status && <Loading />}
 
       <h3>User Info</h3>
       <hr className="forHR" />
@@ -131,7 +164,12 @@ export default function TableDemo() {
           </Button>
         </div>
         <div className={styles.toolbarBoxRight}>
-          <input type="text" placeholder="&#xF002; Search..." />
+          <input
+            type="text"
+            placeholder="&#xF002; Search..."
+            onChange={handleSearchData}
+            onKeyUp={handleSearchData}
+          />
         </div>
       </div>
 
