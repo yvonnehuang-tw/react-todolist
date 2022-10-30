@@ -60,6 +60,7 @@ export default function TableDemo() {
         method: "DELETE",
       });
       getUserData();
+      setDeleteBtnDisable(true);
     } catch (error) {
       console.error("Error:", error);
     } finally {
