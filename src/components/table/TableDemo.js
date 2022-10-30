@@ -52,21 +52,26 @@ export default function TableDemo() {
     }
   }
 
-  async function removeUserData(isRemoveId) {
-    try {
-      // setLoading(true);
-      dispatch({ type: "IS_LOADING", nextLoading: true });
-      await fetch(`http://localhost:8888/user/${isRemoveId}`, {
-        method: "DELETE",
+  function removeMultipleUserData() {
+    const tmpDeleteUsers = userData.filter((item) => item.checked);
+
+    dispatch({ type: "IS_LOADING", nextLoading: true });
+    setDeleteModalShow(false);
+
+    Promise.all(
+      tmpDeleteUsers.map((user) =>
+        fetch(`http://localhost:8888/user/${user.id}`, {
+          method: "DELETE",
+        }).catch((error) => console.error("Error:", error))
+      )
+    )
+      .then(() => {
+        getUserData();
+        setDeleteBtnDisable(true);
+      })
+      .then(() => {
+        dispatch({ type: "IS_LOADING", nextLoading: false });
       });
-      getUserData();
-      setDeleteBtnDisable(true);
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      // setLoading(false);
-      dispatch({ type: "IS_LOADING", nextLoading: false });
-    }
   }
 
   function handleTableCheckedAll(tmpChecked) {
@@ -136,11 +141,7 @@ export default function TableDemo() {
   };
 
   const handleDeleteSaveBtn = () => {
-    const tmpDeleteUser = userData.filter((item) => item.checked);
-    const removeIdArray = tmpDeleteUser.map((user) => user.id);
-    removeIdArray.forEach((id) => removeUserData(id));
-
-    setDeleteModalShow(false);
+    removeMultipleUserData();
   };
 
   return (
