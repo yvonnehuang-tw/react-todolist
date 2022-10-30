@@ -1,8 +1,9 @@
 import styles from "../../styles/Table.module.css";
 import { Button } from "react-bootstrap";
 
-import { useEffect, useState, useReducer, useRef } from "react";
-import reducer from "../../reducer/reducer";
+import { useEffect, useState, useRef } from "react";
+// import { useEffect, useState, useReducer, useRef } from "react";
+// import reducer from "../../reducer/reducer";
 
 import Loading from "../common/Loading";
 import UserTable from "./UserTable";
@@ -12,8 +13,8 @@ import DeleteUserModal from "./DeleteUserModal";
 export default function TableDemo() {
   const ref = useRef(false);
 
-  // const [loading, setLoading] = useState(true);
-  const [loading, dispatch] = useReducer(reducer, { status: true });
+  const [loading, setLoading] = useState(true);
+  // const [loading, dispatch] = useReducer(reducer, { status: true });
 
   const [userData, setUserData] = useState([]);
   const [addModalShow, setAddModalShow] = useState(false);
@@ -40,8 +41,23 @@ export default function TableDemo() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      // setLoading(false);
-      dispatch({ type: "IS_LOADING", loading: false });
+      setLoading(false);
+      // dispatch({ type: "IS_LOADING", loading: false });
+    }
+  }
+
+  async function removeUserData(isRemoveId) {
+    try {
+      setLoading(true);
+      await fetch(`http://localhost:8888/user/${isRemoveId}`, {
+        method: "DELETE",
+      });
+      getUserData();
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+      // dispatch({ type: "IS_LOADING", loading: false });
     }
   }
 
@@ -86,12 +102,17 @@ export default function TableDemo() {
   };
 
   const handleDeleteSaveBtn = () => {
+    const tmpDeleteUser = userData.filter((item) => item.checked);
+    const removeIdArray = tmpDeleteUser.map((user) => user.id);
+    removeIdArray.forEach((id) => removeUserData(id));
+
     setDeleteModalShow(false);
   };
 
   return (
     <div className={styles.tableContainer}>
-      {loading.status && <Loading />}
+      {loading && <Loading />}
+      {/* {loading.status && <Loading />} */}
 
       <h3>User Info</h3>
       <hr className="forHR" />

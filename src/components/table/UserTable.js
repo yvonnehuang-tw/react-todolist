@@ -62,7 +62,7 @@ export default function UserTable({
                   checked={user.checked}
                 />
               </td>
-              <td style={{ width: 40, textAlign: "center" }}>{user.id + 1}</td>
+              <td style={{ width: 40, textAlign: "center" }}>{user.id}</td>
               <td>{`${user.firstName} ${user.lastName}`}</td>
               <td>{user.country}</td>
               <td>{user.address}</td>
