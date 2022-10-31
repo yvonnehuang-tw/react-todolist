@@ -5,11 +5,11 @@ import CustomButton from "../common/CustomButton";
 export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
   const [inputValue, setInputValue] = useState("");
 
-  function handleChangeInputValue(event) {
+  const handleChangeInputValue = (event) => {
     setInputValue(event.target.value);
-  }
+  };
 
-  function handleClickAddBtn(event) {
+  const handleClickAddBtn = (event) => {
     if (event.type === "click" || event.key === "Enter") {
       if (inputValue.trim() === "") {
         onErrorMessage(true);
@@ -19,7 +19,7 @@ export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
         setInputValue("");
       }
     }
-  }
+  };
 
   return (
     <div className={styles.inputContent} style={{ marginTop: errorMessage ? 20 : 50 }}>

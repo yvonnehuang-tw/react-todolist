@@ -12,7 +12,7 @@ export default function TodoDemo() {
   const [todoContent, setTodoContent] = useState({});
 
   // Add
-  function handleAddTodo(inputValue) {
+  const handleAddTodo = (inputValue) => {
     setTodos([
       {
         id: nextId++,
@@ -21,7 +21,7 @@ export default function TodoDemo() {
       },
       ...todos,
     ]);
-  }
+  };
 
   const handleCloseEditModal = () => {
     setEditModalShow(false);
@@ -41,18 +41,18 @@ export default function TodoDemo() {
   };
 
   // Edit
-  function handleOpenEditModal(tmpTodo) {
+  const handleOpenEditModal = (tmpTodo) => {
     setTodoContent(tmpTodo);
     setEditModalShow(true);
-  }
+  };
 
   // Delete
-  function handleDeleteTodo(todoId) {
+  const handleDeleteTodo = (todoId) => {
     setTodos(todos.filter((todo) => todo.id !== todoId));
-  }
+  };
 
   // Change todo
-  function handleChangeTodo(tmpTodo) {
+  const handleChangeTodo = (tmpTodo) => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === tmpTodo.id) {
@@ -62,12 +62,10 @@ export default function TodoDemo() {
         }
       })
     );
-  }
+  };
 
   const ErrorMessage = () =>
-    errorMessageShow && (
-      <div className={styles.errorMessage}>Input is required.</div>
-    );
+    errorMessageShow && <div className={styles.errorMessage}>Input is required.</div>;
 
   return (
     <div className={`main ${styles.todolistContainer}`}>

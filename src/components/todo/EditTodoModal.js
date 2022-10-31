@@ -7,17 +7,17 @@ export default function EditTodoModal({
   onCloseEditModal,
   onSaveChangeTodo,
 }) {
-  function handleCloseBtn() {
+  const handleCloseBtn = () => {
     onCloseEditModal();
-  }
+  };
 
-  function handleSaveBtn() {
+  const handleSaveBtn = () => {
     onSaveChangeTodo();
-  }
+  };
 
-  function handleChangeTodo(tmpTodoValue) {
+  const handleChangeTodo = (tmpTodoValue) => {
     onChangeTodo({ ...todoContent, value: tmpTodoValue });
-  }
+  };
 
   return (
     <Modal centered show={editModalShow} onHide={handleCloseBtn}>

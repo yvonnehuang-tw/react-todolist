@@ -17,8 +17,13 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
     setNewUserData({ ...newUserData, [type]: value });
   };
 
+  const handleClickCloseBtn = () => {
+    setNewUserData(initialNewUserData);
+    onCloseBtn();
+  };
+
   return (
-    <Modal centered show={modalShow} onHide={onCloseBtn}>
+    <Modal centered show={modalShow} onHide={handleClickCloseBtn}>
       <Modal.Header closeButton>
         <Modal.Title>Add user</Modal.Title>
       </Modal.Header>
@@ -100,7 +105,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onCloseBtn}>
+        <Button variant="secondary" onClick={handleClickCloseBtn}>
           Close
         </Button>
         <Button
