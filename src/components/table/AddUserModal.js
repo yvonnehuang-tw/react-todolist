@@ -32,6 +32,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
                 type="text"
                 placeholder="Enter first name"
                 autoComplete="new-password"
+                style={{ borderColor: newUserData.firstName === "" ? "red" : "#ced4da" }}
                 onChange={(e) => handleChangeUserData("firstName", e.target.value)}
               />
             </Form.Group>
@@ -43,6 +44,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
                 type="text"
                 placeholder="Enter last name"
                 autoComplete="new-password"
+                style={{ borderColor: newUserData.lastName === "" ? "red" : "#ced4da" }}
                 onChange={(e) => handleChangeUserData("lastName", e.target.value)}
               />
             </Form.Group>
@@ -55,6 +57,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               type="email"
               placeholder="Enter email"
               autoComplete="new-password"
+              style={{ borderColor: newUserData.email === "" ? "red" : "#ced4da" }}
               onChange={(e) => handleChangeUserData("email", e.target.value)}
             />
           </Form.Group>
@@ -66,6 +69,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               type="text"
               placeholder="Enter job"
               autoComplete="new-password"
+              style={{ borderColor: newUserData.job === "" ? "red" : "#ced4da" }}
               onChange={(e) => handleChangeUserData("job", e.target.value)}
             />
           </Form.Group>
@@ -77,6 +81,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               type="text"
               placeholder="Enter address"
               autoComplete="new-password"
+              style={{ borderColor: newUserData.address === "" ? "red" : "#ced4da" }}
               onChange={(e) => handleChangeUserData("address", e.target.value)}
             />
           </Form.Group>
@@ -88,6 +93,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               type="text"
               placeholder="Enter country"
               autoComplete="new-password"
+              style={{ borderColor: newUserData.country === "" ? "red" : "#ced4da" }}
               onChange={(e) => handleChangeUserData("country", e.target.value)}
             />
           </Form.Group>
@@ -97,7 +103,20 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
         <Button variant="secondary" onClick={onCloseBtn}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => onSaveBtn(newUserData)}>
+        <Button
+          variant="primary"
+          onClick={() => onSaveBtn(newUserData)}
+          disabled={
+            !(
+              newUserData.firstName &&
+              newUserData.lastName &&
+              newUserData.email &&
+              newUserData.job &&
+              newUserData.address &&
+              newUserData.country
+            )
+          }
+        >
           Save
         </Button>
       </Modal.Footer>

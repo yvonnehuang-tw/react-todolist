@@ -22,10 +22,7 @@ export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
   }
 
   return (
-    <div
-      className={styles.inputContent}
-      style={{ marginTop: errorMessage ? 20 : 50 }}
-    >
+    <div className={styles.inputContent} style={{ marginTop: errorMessage ? 20 : 50 }}>
       <input
         type="text"
         placeholder="Enter a todo..."
