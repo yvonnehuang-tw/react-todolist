@@ -70,7 +70,7 @@ export default function TodoDemo() {
     );
 
   return (
-    <div className={styles.todolistContainer}>
+    <div className={`main ${styles.todolistContainer}`}>
       <ErrorMessage />
       <AddTodo
         onAddTodo={handleAddTodo}

@@ -146,53 +146,55 @@ export default function TableDemo() {
   };
 
   return (
-    <div className={styles.tableContainer}>
-      {/* {loading && <Loading />} */}
-      {loading.status && <Loading />}
+    <div className="main">
+      <div className={styles.tableContainer}>
+        {/* {loading && <Loading />} */}
+        {loading.status && <Loading />}
 
-      <h3>User Info</h3>
-      <hr className="forHR" />
+        <h3>User Info</h3>
+        <hr className="forHR" />
 
-      <div className={styles.toolbarBox}>
-        <div className={styles.toolbarBoxLeft}>
-          <Button variant="primary" onClick={handleClickAddBtn}>
-            Add
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={handleClickDeleteBtn}
-            disabled={deleteBtnDisable}
-          >
-            Delete
-          </Button>
+        <div className={styles.toolbarBox}>
+          <div className={styles.toolbarBoxLeft}>
+            <Button variant="primary" onClick={handleClickAddBtn}>
+              Add
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleClickDeleteBtn}
+              disabled={deleteBtnDisable}
+            >
+              Delete
+            </Button>
+          </div>
+          <div className={styles.toolbarBoxRight}>
+            <input
+              type="text"
+              placeholder="&#xF002; Search..."
+              onChange={handleSearchData}
+              onKeyUp={handleSearchData}
+            />
+          </div>
         </div>
-        <div className={styles.toolbarBoxRight}>
-          <input
-            type="text"
-            placeholder="&#xF002; Search..."
-            onChange={handleSearchData}
-            onKeyUp={handleSearchData}
-          />
-        </div>
+
+        <UserTable
+          userData={userData}
+          onTableCheckedAll={handleTableCheckedAll}
+          onChangeDeleteBtnDisable={handleChangeDeleteBtnDisable}
+        />
+
+        <AddUserModal
+          modalShow={addModalShow}
+          onCloseBtn={() => handleCloseBtn("add")}
+          onSaveBtn={handleAddSaveBtn}
+        />
+
+        <DeleteUserModal
+          modalShow={deleteModalShow}
+          onCloseBtn={() => handleCloseBtn("delete")}
+          onSaveBtn={handleDeleteSaveBtn}
+        />
       </div>
-
-      <UserTable
-        userData={userData}
-        onTableCheckedAll={handleTableCheckedAll}
-        onChangeDeleteBtnDisable={handleChangeDeleteBtnDisable}
-      />
-
-      <AddUserModal
-        modalShow={addModalShow}
-        onCloseBtn={() => handleCloseBtn("add")}
-        onSaveBtn={handleAddSaveBtn}
-      />
-
-      <DeleteUserModal
-        modalShow={deleteModalShow}
-        onCloseBtn={() => handleCloseBtn("delete")}
-        onSaveBtn={handleDeleteSaveBtn}
-      />
     </div>
   );
 }

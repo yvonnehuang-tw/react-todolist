@@ -6,27 +6,15 @@ let theme = localStorage.getItem("theme") || "light-background";
 const Header = () => {
   const NAVLIST = [
     {
-      url: "todolist",
+      url: "/todolist",
       icon: "icon-list-ul",
       name: "TodoList",
     },
     {
-      url: "table",
+      url: "/table",
       icon: "icon-table",
       name: "Table",
     },
-    // {
-    //   url: "#",
-    //   icon: "icon-user",
-    // },
-    // {
-    //   url: "#",
-    //   icon: "icon-heart",
-    // },
-    // {
-    //   url: "#",
-    //   icon: "icon-shopping-cart",
-    // },
   ];
 
   const location = useLocation();
@@ -56,7 +44,11 @@ const Header = () => {
 
   return (
     <header className={`header ${defaultMode}`}>
-      <h4 className="logo">{headerName}</h4>
+      <h4 className="logo">
+        <Link to="/" onClick={() => setHeaderName("Demo")}>
+          {headerName}
+        </Link>
+      </h4>
       <nav>
         <ul className="navigation">
           {NAVLIST.map((list) => {
