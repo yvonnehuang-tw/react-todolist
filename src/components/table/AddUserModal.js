@@ -1,6 +1,22 @@
+import { useState } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 
 export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
+  const initialNewUserData = {
+    firstName: null,
+    lastName: null,
+    email: null,
+    job: null,
+    address: null,
+    country: null,
+    checked: false,
+  };
+  const [newUserData, setNewUserData] = useState(initialNewUserData);
+
+  const handleChangeUserData = (type, value) => {
+    setNewUserData({ ...newUserData, [type]: value });
+  };
+
   return (
     <Modal centered show={modalShow} onHide={onCloseBtn}>
       <Modal.Header closeButton>
@@ -16,6 +32,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
                 type="text"
                 placeholder="Enter first name"
                 autoComplete="new-password"
+                onChange={(e) => handleChangeUserData("firstName", e.target.value)}
               />
             </Form.Group>
 
@@ -26,6 +43,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
                 type="text"
                 placeholder="Enter last name"
                 autoComplete="new-password"
+                onChange={(e) => handleChangeUserData("lastName", e.target.value)}
               />
             </Form.Group>
           </Row>
@@ -37,26 +55,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               type="email"
               placeholder="Enter email"
               autoComplete="new-password"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formUserCountry">
-            <Form.Label>Country</Form.Label>
-            <Form.Control
-              size="sm"
-              type="text"
-              placeholder="Enter country"
-              autoComplete="new-password"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formUserAddress">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              size="sm"
-              type="text"
-              placeholder="Enter address"
-              autoComplete="new-password"
+              onChange={(e) => handleChangeUserData("email", e.target.value)}
             />
           </Form.Group>
 
@@ -67,6 +66,29 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               type="text"
               placeholder="Enter job"
               autoComplete="new-password"
+              onChange={(e) => handleChangeUserData("job", e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formUserAddress">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              size="sm"
+              type="text"
+              placeholder="Enter address"
+              autoComplete="new-password"
+              onChange={(e) => handleChangeUserData("address", e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formUserCountry">
+            <Form.Label>Country</Form.Label>
+            <Form.Control
+              size="sm"
+              type="text"
+              placeholder="Enter country"
+              autoComplete="new-password"
+              onChange={(e) => handleChangeUserData("country", e.target.value)}
             />
           </Form.Group>
         </Form>
@@ -75,7 +97,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
         <Button variant="secondary" onClick={onCloseBtn}>
           Close
         </Button>
-        <Button variant="primary" onClick={onSaveBtn}>
+        <Button variant="primary" onClick={() => onSaveBtn(newUserData)}>
           Save
         </Button>
       </Modal.Footer>

@@ -34,7 +34,7 @@ export default function TableDemo() {
     getUserData();
   }, []);
 
-  async function getUserData() {
+  const getUserData = async () => {
     try {
       // setLoading(true);
       dispatch({ type: "IS_LOADING", nextLoading: true });
@@ -50,9 +50,22 @@ export default function TableDemo() {
       // setLoading(false);
       dispatch({ type: "IS_LOADING", nextLoading: false });
     }
-  }
+  };
 
-  function removeMultipleUserData() {
+  const postUserData = (tmpNewUserData) => {
+    dispatch({ type: "IS_LOADING", nextLoading: true });
+    setAddModalShow(false);
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tmpNewUserData),
+    };
+
+    fetch("http://localhost:8888/user", requestOptions).then(() => getUserData());
+  };
+
+  const removeMultipleUserData = () => {
     const tmpDeleteUsers = userData.filter((item) => item.checked);
 
     dispatch({ type: "IS_LOADING", nextLoading: true });
@@ -72,32 +85,13 @@ export default function TableDemo() {
       .then(() => {
         dispatch({ type: "IS_LOADING", nextLoading: false });
       });
-  }
+  };
 
-  function handleTableCheckedAll(tmpChecked) {
-    const tmpUserData = userData.map((item) => {
-      return { ...item, checked: tmpChecked };
-    });
-    setUserData(tmpUserData);
-    setDeleteBtnDisable(tmpChecked ? false : true);
-  }
+  const handleClickAddBtn = () => setAddModalShow(true);
 
-  function handleChangeDeleteBtnDisable(tmpUserData) {
-    setUserData(tmpUserData);
+  const handleClickDeleteBtn = () => setDeleteModalShow(true);
 
-    const hasCheckedData = tmpUserData.filter((data) => data.checked);
-    setDeleteBtnDisable(hasCheckedData.length > 0 ? false : true);
-  }
-
-  function handleClickAddBtn() {
-    setAddModalShow(true);
-  }
-
-  function handleClickDeleteBtn() {
-    setDeleteModalShow(true);
-  }
-
-  function handleSearchData(e) {
+  const handleSearchData = (e) => {
     setInputText(e.target.value.toLowerCase());
     if (e.code === "Enter" && inputText === "") {
       return;
@@ -122,9 +116,28 @@ export default function TableDemo() {
       });
       setUserData(filteredData);
     }
-  }
+  };
 
-  const handleCloseBtn = (key) => {
+  const handleTableCheckedAll = (tmpChecked) => {
+    const tmpUserData = userData.map((item) => {
+      return { ...item, checked: tmpChecked };
+    });
+    setUserData(tmpUserData);
+    setDeleteBtnDisable(tmpChecked ? false : true);
+  };
+
+  const handleChangeDeleteBtnDisable = (tmpUserData) => {
+    setUserData(tmpUserData);
+
+    const hasCheckedData = tmpUserData.filter((data) => data.checked);
+    setDeleteBtnDisable(hasCheckedData.length > 0 ? false : true);
+  };
+
+  const handleAddModalSaveBtn = (tmpNewUserData) => postUserData(tmpNewUserData);
+
+  const handleDeleteModalSaveBtn = () => removeMultipleUserData();
+
+  const handleModalCloseBtn = (key) => {
     switch (key) {
       case "add":
         setAddModalShow(false);
@@ -135,14 +148,6 @@ export default function TableDemo() {
       default:
         break;
     }
-  };
-
-  const handleAddSaveBtn = () => {
-    setAddModalShow(false);
-  };
-
-  const handleDeleteSaveBtn = () => {
-    removeMultipleUserData();
   };
 
   return (
@@ -185,14 +190,14 @@ export default function TableDemo() {
 
         <AddUserModal
           modalShow={addModalShow}
-          onCloseBtn={() => handleCloseBtn("add")}
-          onSaveBtn={handleAddSaveBtn}
+          onCloseBtn={() => handleModalCloseBtn("add")}
+          onSaveBtn={handleAddModalSaveBtn}
         />
 
         <DeleteUserModal
           modalShow={deleteModalShow}
-          onCloseBtn={() => handleCloseBtn("delete")}
-          onSaveBtn={handleDeleteSaveBtn}
+          onCloseBtn={() => handleModalCloseBtn("delete")}
+          onSaveBtn={handleDeleteModalSaveBtn}
         />
       </div>
     </div>
