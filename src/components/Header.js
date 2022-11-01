@@ -11,9 +11,14 @@ const Header = () => {
       name: "TodoList",
     },
     {
-      url: "/table",
+      url: "/table-use-state",
       icon: "icon-table",
-      name: "Table",
+      name: "Table use state",
+    },
+    {
+      url: "/table-use-reducer",
+      icon: "icon-th-list",
+      name: "Table use reducer",
     },
   ];
 
@@ -61,11 +66,7 @@ const Header = () => {
             );
           })}
           <li>
-            <a
-              href="#/"
-              style={{ cursor: "pointer" }}
-              onClick={handleClickChangeTheme}
-            >
+            <a href="#/" style={{ cursor: "pointer" }} onClick={handleClickChangeTheme}>
               <i className="icon-adjust"></i>
             </a>
           </li>

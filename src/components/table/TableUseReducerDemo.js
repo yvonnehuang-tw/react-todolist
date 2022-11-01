@@ -1,7 +1,6 @@
 import styles from "../../styles/Table.module.css";
 import { Button } from "react-bootstrap";
 
-// import { useEffect, useState, useReducer, useRef } from "react";
 import { useEffect, useState, useReducer } from "react";
 import reducer from "../../reducer/reducer";
 
@@ -10,44 +9,36 @@ import UserTable from "./UserTable";
 import AddUserModal from "./AddUserModal";
 import DeleteUserModal from "./DeleteUserModal";
 
-export default function TableDemo() {
-  // const ref = useRef(false);
-
-  // const [loading, setLoading] = useState(false);
-  const [loading, dispatch] = useReducer(reducer, { status: false });
-
-  const [userData, setUserData] = useState([]);
-  const [inputText, setInputText] = useState("");
-  const [originUserData, setOriginUserData] = useState([]);
+export default function TableUseReducerDemo() {
+  const [state, dispatch] = useReducer(reducer, {
+    loadingStatus: false,
+    userData: [],
+    inputText: "",
+    originUserData: [],
+  });
 
   const [addModalShow, setAddModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
   useEffect(() => {
-    // if (ref.current) {
-    //   getUserData();
-    // }
-    // return () => {
-    //   ref.current = true;
-    // };
     getUserData();
   }, []);
 
   const getUserData = async () => {
     try {
-      // setLoading(true);
       dispatch({ type: "IS_LOADING", nextLoading: true });
+
       const response = await fetch("http://localhost:8888/user");
       const data = await response.json();
       const tmpData = data.map((item) => {
         return { ...item, checked: false };
       });
-      setUserData(tmpData);
+
+      dispatch({ type: "CHANGE_USER_DATA", nextUserData: tmpData });
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      // setLoading(false);
       dispatch({ type: "IS_LOADING", nextLoading: false });
     }
   };
@@ -66,7 +57,7 @@ export default function TableDemo() {
   };
 
   const removeMultipleUserData = () => {
-    const tmpDeleteUsers = userData.filter((item) => item.checked);
+    const tmpDeleteUsers = state.userData.filter((item) => item.checked);
 
     dispatch({ type: "IS_LOADING", nextLoading: true });
     setDeleteModalShow(false);
@@ -92,19 +83,22 @@ export default function TableDemo() {
   const handleClickDeleteBtn = () => setDeleteModalShow(true);
 
   const handleSearchData = (e) => {
-    setInputText(e.target.value.toLowerCase());
-    if (e.code === "Enter" && inputText === "") {
+    dispatch({ type: "CHANGE_INPUT_TEXT", nextInputText: e.target.value.toLowerCase() });
+
+    if (e.code === "Enter" && state.inputText === "") {
       return;
     }
-    if (originUserData.length === 0) {
-      setOriginUserData(userData);
+
+    if (state.originUserData.length === 0) {
+      dispatch({ type: "CHANGE_ORIGIN_USER_DATA", nextOriginUserData: state.userData });
     }
 
-    if (inputText === "") {
-      setUserData(originUserData);
+    if (state.inputText === "") {
+      dispatch({ type: "CHANGE_USER_DATA", nextUserData: state.originUserData });
     } else {
-      const regExpInputText = new RegExp(inputText, "g");
-      const filteredData = originUserData.filter((data) => {
+      const regExpInputText = new RegExp(state.inputText, "g");
+
+      const filteredData = state.originUserData.filter((data) => {
         const tmpName = `${data.firstName} ${data.lastName}`;
         return (
           tmpName.toLowerCase().match(regExpInputText) ||
@@ -114,20 +108,22 @@ export default function TableDemo() {
           data.country.toLowerCase().match(regExpInputText)
         );
       });
-      setUserData(filteredData);
+
+      dispatch({ type: "CHANGE_USER_DATA", nextUserData: filteredData });
     }
   };
 
   const handleTableCheckedAll = (tmpChecked) => {
-    const tmpUserData = userData.map((item) => {
+    const tmpUserData = state.userData.map((item) => {
       return { ...item, checked: tmpChecked };
     });
-    setUserData(tmpUserData);
+
+    dispatch({ type: "CHANGE_USER_DATA", nextUserData: tmpUserData });
     setDeleteBtnDisable(tmpChecked ? false : true);
   };
 
   const handleChangeDeleteBtnDisable = (tmpUserData) => {
-    setUserData(tmpUserData);
+    dispatch({ type: "CHANGE_USER_DATA", nextUserData: tmpUserData });
 
     const hasCheckedData = tmpUserData.filter((data) => data.checked);
     setDeleteBtnDisable(hasCheckedData.length > 0 ? false : true);
@@ -153,8 +149,7 @@ export default function TableDemo() {
   return (
     <div className="main">
       <div className={styles.tableContainer}>
-        {/* {loading && <Loading />} */}
-        {loading.status && <Loading />}
+        {state.loadingStatus && <Loading />}
 
         <h3>User Info</h3>
         <hr className="forHR" />
@@ -183,7 +178,7 @@ export default function TableDemo() {
         </div>
 
         <UserTable
-          userData={userData}
+          userData={state.userData}
           onTableCheckedAll={handleTableCheckedAll}
           onChangeDeleteBtnDisable={handleChangeDeleteBtnDisable}
         />

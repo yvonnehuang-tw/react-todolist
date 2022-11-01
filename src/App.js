@@ -3,7 +3,7 @@ import "./App.css";
 // import Root from "./routes/Root";
 import ErrorPage from "./ErrorPage";
 // import TodoDemo from "./components/todo/TodoDemo";
-// import TableDemo from "./components/table/TableDemo";
+// import TableUseStateDemo from "./components/table/TableUseStateDemo";
 
 // function App() {
 //   const router = createBrowserRouter([
@@ -18,7 +18,7 @@ import ErrorPage from "./ErrorPage";
 //         },
 //         {
 //           path: "table",
-//           element: <TableDemo />,
+//           element: <TableUseStateDemo />,
 //           errorElement: <div>Oops! There was an error.</div>,
 //         },
 //       ],
@@ -40,9 +40,10 @@ import Footer from "./components/Footer";
 import Loading from "./components/common/Loading";
 
 // import TodoDemo from "./components/todo/TodoDemo";
-// import TableDemo from "./components/table/TableDemo";
+// import TableUseStateDemo from "./components/table/TableUseStateDemo";
 const TodoDemo = lazy(() => import("./components/todo/TodoDemo"));
-const TableDemo = lazy(() => import("./components/table/TableDemo"));
+const TableUseStateDemo = lazy(() => import("./components/table/TableUseStateDemo"));
+const TableUseReducerDemo = lazy(() => import("./components/table/TableUseReducerDemo"));
 
 function App() {
   return (
@@ -53,7 +54,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/todolist" element={<TodoDemo />} />
-            <Route path="/table" element={<TableDemo />} />
+            <Route path="/table-use-state" element={<TableUseStateDemo />} />
+            <Route path="/table-use-reducer" element={<TableUseReducerDemo />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Suspense>
