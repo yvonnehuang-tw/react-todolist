@@ -1,25 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 
+const initialNewUserData = {
+  firstName: null,
+  lastName: null,
+  email: null,
+  job: null,
+  address: null,
+  country: null,
+  checked: false,
+};
+
 export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
-  const initialNewUserData = {
-    firstName: null,
-    lastName: null,
-    email: null,
-    job: null,
-    address: null,
-    country: null,
-    checked: false,
-  };
   const [newUserData, setNewUserData] = useState(initialNewUserData);
+
+  useEffect(() => {
+    resetNewUserData();
+  }, [modalShow]);
+
+  const resetNewUserData = () => setNewUserData(initialNewUserData);
 
   const handleChangeUserData = (type, value) => {
     setNewUserData({ ...newUserData, [type]: value });
   };
 
   const handleClickCloseBtn = () => {
-    setNewUserData(initialNewUserData);
+    // setNewUserData(initialNewUserData);
     onCloseBtn();
+  };
+
+  const handleClickSaveBtn = () => {
+    onSaveBtn(newUserData);
+    // setNewUserData(initialNewUserData);
+  };
+
+  const checkFormValid = () => {
+    const isValidResult = !(
+      newUserData.firstName &&
+      newUserData.lastName &&
+      newUserData.email &&
+      /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(newUserData.email) &&
+      newUserData.job &&
+      newUserData.address &&
+      newUserData.country
+    );
+    return isValidResult;
   };
 
   return (
@@ -135,17 +160,19 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
         </Button>
         <Button
           variant="primary"
-          onClick={() => onSaveBtn(newUserData)}
-          disabled={
-            !(
-              newUserData.firstName &&
-              newUserData.lastName &&
-              newUserData.email &&
-              newUserData.job &&
-              newUserData.address &&
-              newUserData.country
-            )
-          }
+          onClick={handleClickSaveBtn}
+          // disabled={
+          //   !(
+          //     newUserData.firstName &&
+          //     newUserData.lastName &&
+          //     newUserData.email &&
+          //     /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(newUserData.email) &&
+          //     newUserData.job &&
+          //     newUserData.address &&
+          //     newUserData.country
+          //   )
+          // }
+          disabled={checkFormValid()}
         >
           Save
         </Button>

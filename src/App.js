@@ -37,6 +37,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
+import Loading from "./components/common/Loading";
 
 // import TodoDemo from "./components/todo/TodoDemo";
 // import TableDemo from "./components/table/TableDemo";
@@ -48,7 +49,7 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/todolist" element={<TodoDemo />} />
