@@ -22,7 +22,7 @@ export default function TableUseReducerDemo() {
   const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
   const getUserData = useCallback(() => {
-    const getUserData = async () => {
+    const getUserDataFunc = async () => {
       try {
         dispatch({ type: "trigger_loading", nextLoading: true });
 
@@ -43,7 +43,7 @@ export default function TableUseReducerDemo() {
       }
     };
 
-    getUserData();
+    getUserDataFunc();
   }, []);
 
   useEffect(() => {
