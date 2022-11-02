@@ -1,14 +1,14 @@
 import styles from "../../styles/Table.module.css";
 import { Button } from "react-bootstrap";
 
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useReducer, useCallback } from "react";
 import reducer from "../../reducer/reducer";
-
 import Loading from "../common/Loading";
 import UserTable from "./UserTable";
 import AddUserModal from "./AddUserModal";
 import DeleteUserModal from "./DeleteUserModal";
 
+const URL = process.env.REACT_APP_BASE_URL;
 export default function TableUseReducerDemo() {
   const [state, dispatch] = useReducer(reducer, {
     loadingStatus: false,
@@ -21,30 +21,37 @@ export default function TableUseReducerDemo() {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
-  useEffect(() => {
+  const getUserData = useCallback(() => {
+    const getUserData = async () => {
+      try {
+        dispatch({ type: "trigger_loading", nextLoading: true });
+
+        // const response = await fetch("http://localhost:8888/user");
+        // const response = await fetch("http://192.168.78.234:8888/user");
+        const response = await fetch(`${URL}:8888/user`);
+
+        const data = await response.json();
+        const tmpData = data.map((item) => {
+          return { ...item, checked: false };
+        });
+
+        dispatch({ type: "changed_user_data", nextUserData: tmpData });
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        dispatch({ type: "trigger_loading", nextLoading: false });
+      }
+    };
+
     getUserData();
   }, []);
 
-  const getUserData = async () => {
-    try {
-      dispatch({ type: "IS_LOADING", nextLoading: true });
-
-      const response = await fetch("http://localhost:8888/user");
-      const data = await response.json();
-      const tmpData = data.map((item) => {
-        return { ...item, checked: false };
-      });
-
-      dispatch({ type: "CHANGE_USER_DATA", nextUserData: tmpData });
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      dispatch({ type: "IS_LOADING", nextLoading: false });
-    }
-  };
+  useEffect(() => {
+    getUserData();
+  }, [getUserData]);
 
   const postUserData = (tmpNewUserData) => {
-    dispatch({ type: "IS_LOADING", nextLoading: true });
+    dispatch({ type: "trigger_loading", nextLoading: true });
     setAddModalShow(false);
 
     const requestOptions = {
@@ -53,18 +60,22 @@ export default function TableUseReducerDemo() {
       body: JSON.stringify(tmpNewUserData),
     };
 
-    fetch("http://localhost:8888/user", requestOptions).then(() => getUserData());
+    // fetch("http://localhost:8888/user", requestOptions).then(() => getUserData());
+    fetch(`${URL}:8888/user`, requestOptions).then(() => getUserData());
   };
 
   const removeMultipleUserData = () => {
     const tmpDeleteUsers = state.userData.filter((item) => item.checked);
 
-    dispatch({ type: "IS_LOADING", nextLoading: true });
+    dispatch({ type: "trigger_loading", nextLoading: true });
     setDeleteModalShow(false);
 
     Promise.all(
       tmpDeleteUsers.map((user) =>
-        fetch(`http://localhost:8888/user/${user.id}`, {
+        // fetch(`http://localhost:8888/user/${user.id}`, {
+        //   method: "DELETE",
+        // }).catch((error) => console.error("Error:", error))
+        fetch(`${URL}:8888/user/${user.id}`, {
           method: "DELETE",
         }).catch((error) => console.error("Error:", error))
       )
@@ -74,7 +85,7 @@ export default function TableUseReducerDemo() {
         setDeleteBtnDisable(true);
       })
       .then(() => {
-        dispatch({ type: "IS_LOADING", nextLoading: false });
+        dispatch({ type: "trigger_loading", nextLoading: false });
       });
   };
 
@@ -83,18 +94,18 @@ export default function TableUseReducerDemo() {
   const handleClickDeleteBtn = () => setDeleteModalShow(true);
 
   const handleSearchData = (e) => {
-    dispatch({ type: "CHANGE_INPUT_TEXT", nextInputText: e.target.value.toLowerCase() });
+    dispatch({ type: "changed_input_text", nextInputText: e.target.value.toLowerCase() });
 
     if (e.code === "Enter" && state.inputText === "") {
       return;
     }
 
     if (state.originUserData.length === 0) {
-      dispatch({ type: "CHANGE_ORIGIN_USER_DATA", nextOriginUserData: state.userData });
+      dispatch({ type: "changed_origin_user_data", nextOriginUserData: state.userData });
     }
 
     if (state.inputText === "") {
-      dispatch({ type: "CHANGE_USER_DATA", nextUserData: state.originUserData });
+      dispatch({ type: "changed_user_data", nextUserData: state.originUserData });
     } else {
       const regExpInputText = new RegExp(state.inputText, "g");
 
@@ -109,7 +120,7 @@ export default function TableUseReducerDemo() {
         );
       });
 
-      dispatch({ type: "CHANGE_USER_DATA", nextUserData: filteredData });
+      dispatch({ type: "changed_user_data", nextUserData: filteredData });
     }
   };
 
@@ -118,12 +129,12 @@ export default function TableUseReducerDemo() {
       return { ...item, checked: tmpChecked };
     });
 
-    dispatch({ type: "CHANGE_USER_DATA", nextUserData: tmpUserData });
+    dispatch({ type: "changed_user_data", nextUserData: tmpUserData });
     setDeleteBtnDisable(tmpChecked ? false : true);
   };
 
   const handleChangeDeleteBtnDisable = (tmpUserData) => {
-    dispatch({ type: "CHANGE_USER_DATA", nextUserData: tmpUserData });
+    dispatch({ type: "changed_user_data", nextUserData: tmpUserData });
 
     const hasCheckedData = tmpUserData.filter((data) => data.checked);
     setDeleteBtnDisable(hasCheckedData.length > 0 ? false : true);

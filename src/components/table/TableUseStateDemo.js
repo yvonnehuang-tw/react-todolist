@@ -1,17 +1,14 @@
 import styles from "../../styles/Table.module.css";
 import { Button } from "react-bootstrap";
 
-// import { useEffect, useState, useReducer, useRef } from "react";
-import { useEffect, useState } from "react";
-
+import { useCallback, useEffect, useState } from "react";
 import Loading from "../common/Loading";
 import UserTable from "./UserTable";
 import AddUserModal from "./AddUserModal";
 import DeleteUserModal from "./DeleteUserModal";
 
+const URL = process.env.REACT_APP_BASE_URL;
 export default function TableUseStateDemo() {
-  // const ref = useRef(false);
-
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState([]);
   const [inputText, setInputText] = useState("");
@@ -21,31 +18,32 @@ export default function TableUseStateDemo() {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteBtnDisable, setDeleteBtnDisable] = useState(true);
 
-  useEffect(() => {
-    // if (ref.current) {
-    //   getUserData();
-    // }
-    // return () => {
-    //   ref.current = true;
-    // };
+  const getUserData = useCallback(() => {
+    const getUserData = async () => {
+      try {
+        setLoading(true);
+        // const response = await fetch("http://localhost:8888/user");
+        // const response = await fetch("http://192.168.78.234:8888/user");
+        const response = await fetch(`${URL}:8888/user`);
+
+        const data = await response.json();
+        const tmpData = data.map((item) => {
+          return { ...item, checked: false };
+        });
+        setUserData(tmpData);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getUserData();
   }, []);
 
-  const getUserData = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("http://localhost:8888/user");
-      const data = await response.json();
-      const tmpData = data.map((item) => {
-        return { ...item, checked: false };
-      });
-      setUserData(tmpData);
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    getUserData();
+  }, [getUserData]);
 
   const postUserData = (tmpNewUserData) => {
     setLoading(true);
@@ -57,7 +55,8 @@ export default function TableUseStateDemo() {
       body: JSON.stringify(tmpNewUserData),
     };
 
-    fetch("http://localhost:8888/user", requestOptions).then(() => getUserData());
+    // fetch("http://localhost:8888/user", requestOptions).then(() => getUserData());
+    fetch(`${URL}:8888/user`, requestOptions).then(() => getUserData());
   };
 
   const removeMultipleUserData = () => {
@@ -67,8 +66,13 @@ export default function TableUseStateDemo() {
     setDeleteModalShow(false);
 
     Promise.all(
+      // tmpDeleteUsers.map((user) =>
+      //   fetch(`http://localhost:8888/user/${user.id}`, {
+      //     method: "DELETE",
+      //   }).catch((error) => console.error("Error:", error))
+      // )
       tmpDeleteUsers.map((user) =>
-        fetch(`http://localhost:8888/user/${user.id}`, {
+        fetch(`${URL}:8888/user/${user.id}`, {
           method: "DELETE",
         }).catch((error) => console.error("Error:", error))
       )

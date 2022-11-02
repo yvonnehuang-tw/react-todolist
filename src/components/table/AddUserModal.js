@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
+
+import { useEffect, useState } from "react";
 
 const initialNewUserData = {
   firstName: null,

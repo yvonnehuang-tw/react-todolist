@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { Table } from "react-bootstrap";
+
+import { useState } from "react";
 
 export default function UserTable({
   userData,
@@ -22,11 +23,12 @@ export default function UserTable({
       }
     });
 
-    if (isUserData.every((item) => item.checked)) {
-      setIsCheckedAll(true);
-    } else {
-      setIsCheckedAll(false);
-    }
+    // if (isUserData.every((item) => item.checked)) {
+    //   setIsCheckedAll(true);
+    // } else {
+    //   setIsCheckedAll(false);
+    // }
+    setIsCheckedAll(isUserData.every((item) => item.checked) ? true : false);
 
     onChangeDeleteBtnDisable(isUserData);
   };

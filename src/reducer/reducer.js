@@ -1,21 +1,21 @@
 const reducer = (state, action) => {
   switch (action.type) {
-    case "IS_LOADING":
+    case "trigger_loading":
       return {
         ...state,
         loadingStatus: action.nextLoading,
       };
-    case "CHANGE_USER_DATA":
+    case "changed_user_data":
       return {
         ...state,
         userData: action.nextUserData,
       };
-    case "CHANGE_INPUT_TEXT":
+    case "changed_input_text":
       return {
         ...state,
         inputText: action.nextInputText,
       };
-    case "CHANGE_ORIGIN_USER_DATA":
+    case "changed_origin_user_data":
       return {
         ...state,
         originUserData: action.nextOriginUserData,

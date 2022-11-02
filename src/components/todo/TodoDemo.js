@@ -1,4 +1,5 @@
 import styles from "../../styles/Todo.module.css";
+
 import { useState } from "react";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
@@ -69,6 +70,7 @@ export default function TodoDemo() {
 
   return (
     <div className={`main ${styles.todolistContainer}`}>
+    {/* <div className={styles.todolistContainer}> */}
       <ErrorMessage />
       <AddTodo
         onAddTodo={handleAddTodo}
@@ -88,6 +90,7 @@ export default function TodoDemo() {
         onCloseEditModal={handleCloseEditModal}
         onSaveChangeTodo={handleSaveChangeTodo}
       />
+    {/* </div> */}
     </div>
   );
 }

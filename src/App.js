@@ -1,9 +1,11 @@
 import "./App.css";
+
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import Root from "./routes/Root";
-import ErrorPage from "./ErrorPage";
+// import ErrorPage from "./ErrorPage";
 // import TodoDemo from "./components/todo/TodoDemo";
 // import TableUseStateDemo from "./components/table/TableUseStateDemo";
+// import TableUseReducerDemo from "./components/table/TableUseReducerDemo";
 
 // function App() {
 //   const router = createBrowserRouter([
@@ -17,8 +19,13 @@ import ErrorPage from "./ErrorPage";
 //           element: <TodoDemo />,
 //         },
 //         {
-//           path: "table",
+//           path: "table-use-state",
 //           element: <TableUseStateDemo />,
+//           errorElement: <div>Oops! There was an error.</div>,
+//         },
+//         {
+//           path: "table-use-reducer",
+//           element: <TableUseReducerDemo />,
 //           errorElement: <div>Oops! There was an error.</div>,
 //         },
 //       ],
@@ -38,7 +45,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Loading from "./components/common/Loading";
-
+import ErrorPage from "./ErrorPage";
 // import TodoDemo from "./components/todo/TodoDemo";
 // import TableUseStateDemo from "./components/table/TableUseStateDemo";
 const TodoDemo = lazy(() => import("./components/todo/TodoDemo"));
