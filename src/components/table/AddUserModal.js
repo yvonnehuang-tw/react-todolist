@@ -1,6 +1,6 @@
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const initialNewUserData = {
   firstName: null,
@@ -14,6 +14,43 @@ const initialNewUserData = {
 
 export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
   const [newUserData, setNewUserData] = useState(initialNewUserData);
+  const [savebtnDisabled, setSaveBtnDisabled] = useState(true);
+
+  const checkFormValid = useCallback(() => {
+    const checkingFormValid = () => {
+      const isValidResult = !(
+        newUserData.firstName &&
+        newUserData.lastName &&
+        newUserData.email &&
+        /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(newUserData.email) &&
+        newUserData.job &&
+        newUserData.address &&
+        newUserData.country
+      );
+      setSaveBtnDisabled(isValidResult);
+    };
+    checkingFormValid();
+  }, [newUserData]);
+
+  useEffect(() => {
+    checkFormValid();
+  }, [checkFormValid]);
+
+  // useEffect(() => {
+  //   const checkFormValid = () => {
+  //     const isValidResult = !(
+  //       newUserData.firstName &&
+  //       newUserData.lastName &&
+  //       newUserData.email &&
+  //       /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(newUserData.email) &&
+  //       newUserData.job &&
+  //       newUserData.address &&
+  //       newUserData.country
+  //     );
+  //     setSaveBtnDisabled(isValidResult);
+  //   };
+  //   checkFormValid();
+  // }, [newUserData]);
 
   useEffect(() => {
     resetNewUserData();
@@ -33,19 +70,6 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
   const handleClickSaveBtn = () => {
     onSaveBtn(newUserData);
     // setNewUserData(initialNewUserData);
-  };
-
-  const checkFormValid = () => {
-    const isValidResult = !(
-      newUserData.firstName &&
-      newUserData.lastName &&
-      newUserData.email &&
-      /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(newUserData.email) &&
-      newUserData.job &&
-      newUserData.address &&
-      newUserData.country
-    );
-    return isValidResult;
   };
 
   return (
@@ -177,7 +201,8 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
           //     newUserData.country
           //   )
           // }
-          disabled={checkFormValid()}
+          disabled={savebtnDisabled}
+          // disabled={checkFormValid()}
         >
           Save
         </Button>
