@@ -1,4 +1,4 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button } from 'react-bootstrap';
 
 export default function DeleteUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
   return (

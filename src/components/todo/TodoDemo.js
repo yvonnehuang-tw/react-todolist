@@ -1,9 +1,9 @@
-import styles from "../../styles/Todo.module.css";
+import styles from '../../styles/Todo.module.css';
 
-import { useState } from "react";
-import AddTodo from "./AddTodo";
-import TodoList from "./TodoList";
-import EditTodoModal from "./EditTodoModal";
+import { useState } from 'react';
+import AddTodo from './AddTodo';
+import TodoList from './TodoList';
+import EditTodoModal from './EditTodoModal';
 
 let nextId = 0;
 export default function TodoDemo() {
@@ -13,7 +13,7 @@ export default function TodoDemo() {
   const [todoContent, setTodoContent] = useState({});
 
   // Add
-  const handleAddTodo = (inputValue) => {
+  const handleAddTodo = inputValue => {
     setTodos([
       {
         id: nextId++,
@@ -30,7 +30,7 @@ export default function TodoDemo() {
 
   const handleSaveChangeTodo = () => {
     setTodos(
-      todos.map((tmpTodo) => {
+      todos.map(tmpTodo => {
         if (tmpTodo.id === todoContent.id) {
           return todoContent;
         } else {
@@ -42,20 +42,20 @@ export default function TodoDemo() {
   };
 
   // Edit
-  const handleOpenEditModal = (tmpTodo) => {
+  const handleOpenEditModal = tmpTodo => {
     setTodoContent(tmpTodo);
     setEditModalShow(true);
   };
 
   // Delete
-  const handleDeleteTodo = (todoId) => {
-    setTodos(todos.filter((todo) => todo.id !== todoId));
+  const handleDeleteTodo = todoId => {
+    setTodos(todos.filter(todo => todo.id !== todoId));
   };
 
   // Change todo
-  const handleChangeTodo = (tmpTodo) => {
+  const handleChangeTodo = tmpTodo => {
     setTodos(
-      todos.map((todo) => {
+      todos.map(todo => {
         if (todo.id === tmpTodo.id) {
           return tmpTodo;
         } else {
@@ -66,11 +66,13 @@ export default function TodoDemo() {
   };
 
   const ErrorMessage = () =>
-    errorMessageShow && <div className={styles.errorMessage}>Input is required.</div>;
+    errorMessageShow && (
+      <div className={styles.errorMessage}>Input is required.</div>
+    );
 
   return (
     <div className={`main ${styles.todolistContainer}`}>
-    {/* <div className={styles.todolistContainer}> */}
+      {/* <div className={styles.todolistContainer}> */}
       <ErrorMessage />
       <AddTodo
         onAddTodo={handleAddTodo}
@@ -80,7 +82,7 @@ export default function TodoDemo() {
       <TodoList
         todos={todos}
         onClickDoneTodo={handleChangeTodo}
-        onOpenEditModal={(tmpTodo) => handleOpenEditModal(tmpTodo)}
+        onOpenEditModal={tmpTodo => handleOpenEditModal(tmpTodo)}
         onDeleteTodo={handleDeleteTodo}
       />
       <EditTodoModal
@@ -90,7 +92,7 @@ export default function TodoDemo() {
         onCloseEditModal={handleCloseEditModal}
         onSaveChangeTodo={handleSaveChangeTodo}
       />
-    {/* </div> */}
+      {/* </div> */}
     </div>
   );
 }

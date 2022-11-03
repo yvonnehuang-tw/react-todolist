@@ -6,11 +6,11 @@ export default function ErrorPage() {
 
   const errorStyle = {
     flex: 1,
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "rgba(237, 241, 242, 1)",
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(237, 241, 242, 1)',
   };
 
   return (

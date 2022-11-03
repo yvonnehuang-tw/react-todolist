@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css';
 
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import Root from "./routes/Root";
@@ -39,18 +39,22 @@ import "./App.css";
 //   );
 // }
 
-import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
-import Loading from "./components/common/Loading";
-import ErrorPage from "./ErrorPage";
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
+import Loading from './components/common/Loading';
+import ErrorPage from './ErrorPage';
 // import TodoDemo from "./components/todo/TodoDemo";
 // import TableUseStateDemo from "./components/table/TableUseStateDemo";
-const TodoDemo = lazy(() => import("./components/todo/TodoDemo"));
-const TableUseStateDemo = lazy(() => import("./components/table/TableUseStateDemo"));
-const TableUseReducerDemo = lazy(() => import("./components/table/TableUseReducerDemo"));
+const TodoDemo = lazy(() => import('./components/todo/TodoDemo'));
+const TableUseStateDemo = lazy(() =>
+  import('./components/table/TableUseStateDemo')
+);
+const TableUseReducerDemo = lazy(() =>
+  import('./components/table/TableUseReducerDemo')
+);
 
 function App() {
   return (
@@ -62,7 +66,10 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/todolist" element={<TodoDemo />} />
             <Route path="/table-use-state" element={<TableUseStateDemo />} />
-            <Route path="/table-use-reducer" element={<TableUseReducerDemo />} />
+            <Route
+              path="/table-use-reducer"
+              element={<TableUseReducerDemo />}
+            />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Suspense>

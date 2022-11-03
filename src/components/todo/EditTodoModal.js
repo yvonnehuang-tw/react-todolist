@@ -1,4 +1,4 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button } from 'react-bootstrap';
 
 export default function EditTodoModal({
   todoContent,
@@ -15,7 +15,7 @@ export default function EditTodoModal({
     onSaveChangeTodo();
   };
 
-  const handleChangeTodo = (tmpTodoValue) => {
+  const handleChangeTodo = tmpTodoValue => {
     onChangeTodo({ ...todoContent, value: tmpTodoValue });
   };
 
@@ -31,11 +31,11 @@ export default function EditTodoModal({
           style={{
             width: 465,
             padding: 10,
-            border: "1px solid #ddd",
+            border: '1px solid #ddd',
             borderRadius: 6,
           }}
           value={todoContent.value}
-          onChange={(e) => handleChangeTodo(e.target.value)}
+          onChange={e => handleChangeTodo(e.target.value)}
         />
       </Modal.Body>
       <Modal.Footer>

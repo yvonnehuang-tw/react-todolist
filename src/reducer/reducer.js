@@ -1,21 +1,21 @@
 const reducer = (state, action) => {
   switch (action.type) {
-    case "trigger_loading":
+    case 'trigger_loading':
       return {
         ...state,
         loadingStatus: action.nextLoading,
       };
-    case "changed_user_data":
+    case 'changed_user_data':
       return {
         ...state,
         userData: action.nextUserData,
       };
-    case "changed_input_text":
+    case 'changed_input_text':
       return {
         ...state,
         inputText: action.nextInputText,
       };
-    case "changed_origin_user_data":
+    case 'changed_origin_user_data':
       return {
         ...state,
         originUserData: action.nextOriginUserData,
@@ -23,7 +23,7 @@ const reducer = (state, action) => {
     default:
       break;
   }
-  throw Error("Unknown action: " + action.type);
+  throw Error('Unknown action: ' + action.type);
 };
 
 export default reducer;

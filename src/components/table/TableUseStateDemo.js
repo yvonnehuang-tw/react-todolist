@@ -1,17 +1,17 @@
-import styles from "../../styles/Table.module.css";
-import { Button } from "react-bootstrap";
+import styles from '../../styles/Table.module.css';
+import { Button } from 'react-bootstrap';
 
-import { useCallback, useEffect, useState } from "react";
-import Loading from "../common/Loading";
-import UserTable from "./UserTable";
-import AddUserModal from "./AddUserModal";
-import DeleteUserModal from "./DeleteUserModal";
+import { useCallback, useEffect, useState } from 'react';
+import Loading from '../common/Loading';
+import UserTable from './UserTable';
+import AddUserModal from './AddUserModal';
+import DeleteUserModal from './DeleteUserModal';
 
 const URL = process.env.REACT_APP_BASE_URL;
 export default function TableUseStateDemo() {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState([]);
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState('');
   const [originUserData, setOriginUserData] = useState([]);
 
   const [addModalShow, setAddModalShow] = useState(false);
@@ -27,12 +27,12 @@ export default function TableUseStateDemo() {
         const response = await fetch(`${URL}:8888/user`);
 
         const data = await response.json();
-        const tmpData = data.map((item) => {
+        const tmpData = data.map(item => {
           return { ...item, checked: false };
         });
         setUserData(tmpData);
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error:', error);
       } finally {
         setLoading(false);
       }
@@ -45,13 +45,13 @@ export default function TableUseStateDemo() {
     getUserData();
   }, [getUserData]);
 
-  const postUserData = (tmpNewUserData) => {
+  const postUserData = tmpNewUserData => {
     setLoading(true);
     setAddModalShow(false);
 
     const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(tmpNewUserData),
     };
 
@@ -60,7 +60,7 @@ export default function TableUseStateDemo() {
   };
 
   const removeMultipleUserData = () => {
-    const tmpDeleteUsers = userData.filter((item) => item.checked);
+    const tmpDeleteUsers = userData.filter(item => item.checked);
 
     setLoading(true);
     setDeleteModalShow(false);
@@ -71,10 +71,10 @@ export default function TableUseStateDemo() {
       //     method: "DELETE",
       //   }).catch((error) => console.error("Error:", error))
       // )
-      tmpDeleteUsers.map((user) =>
+      tmpDeleteUsers.map(user =>
         fetch(`${URL}:8888/user/${user.id}`, {
-          method: "DELETE",
-        }).catch((error) => console.error("Error:", error))
+          method: 'DELETE',
+        }).catch(error => console.error('Error:', error))
       )
     )
       .then(() => {
@@ -90,20 +90,20 @@ export default function TableUseStateDemo() {
 
   const handleClickDeleteBtn = () => setDeleteModalShow(true);
 
-  const handleSearchData = (e) => {
+  const handleSearchData = e => {
     setInputText(e.target.value.toLowerCase());
-    if (e.code === "Enter" && inputText === "") {
+    if (e.code === 'Enter' && inputText === '') {
       return;
     }
     if (originUserData.length === 0) {
       setOriginUserData(userData);
     }
 
-    if (inputText === "") {
+    if (inputText === '') {
       setUserData(originUserData);
     } else {
-      const regExpInputText = new RegExp(inputText, "g");
-      const filteredData = originUserData.filter((data) => {
+      const regExpInputText = new RegExp(inputText, 'g');
+      const filteredData = originUserData.filter(data => {
         const tmpName = `${data.firstName} ${data.lastName}`;
         return (
           tmpName.toLowerCase().match(regExpInputText) ||
@@ -117,31 +117,31 @@ export default function TableUseStateDemo() {
     }
   };
 
-  const handleTableCheckedAll = (tmpChecked) => {
-    const tmpUserData = userData.map((item) => {
+  const handleTableCheckedAll = tmpChecked => {
+    const tmpUserData = userData.map(item => {
       return { ...item, checked: tmpChecked };
     });
     setUserData(tmpUserData);
     setDeleteBtnDisable(tmpChecked ? false : true);
   };
 
-  const handleChangeDeleteBtnDisable = (tmpUserData) => {
+  const handleChangeDeleteBtnDisable = tmpUserData => {
     setUserData(tmpUserData);
 
-    const hasCheckedData = tmpUserData.filter((data) => data.checked);
+    const hasCheckedData = tmpUserData.filter(data => data.checked);
     setDeleteBtnDisable(hasCheckedData.length > 0 ? false : true);
   };
 
-  const handleAddModalSaveBtn = (tmpNewUserData) => postUserData(tmpNewUserData);
+  const handleAddModalSaveBtn = tmpNewUserData => postUserData(tmpNewUserData);
 
   const handleDeleteModalSaveBtn = () => removeMultipleUserData();
 
-  const handleModalCloseBtn = (key) => {
+  const handleModalCloseBtn = key => {
     switch (key) {
-      case "add":
+      case 'add':
         setAddModalShow(false);
         break;
-      case "delete":
+      case 'delete':
         setDeleteModalShow(false);
         break;
       default:
@@ -188,13 +188,13 @@ export default function TableUseStateDemo() {
 
         <AddUserModal
           modalShow={addModalShow}
-          onCloseBtn={() => handleModalCloseBtn("add")}
+          onCloseBtn={() => handleModalCloseBtn('add')}
           onSaveBtn={handleAddModalSaveBtn}
         />
 
         <DeleteUserModal
           modalShow={deleteModalShow}
-          onCloseBtn={() => handleModalCloseBtn("delete")}
+          onCloseBtn={() => handleModalCloseBtn('delete')}
           onSaveBtn={handleDeleteModalSaveBtn}
         />
       </div>

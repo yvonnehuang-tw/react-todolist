@@ -1,6 +1,6 @@
-import styles from "../../styles/Todo.module.css";
+import styles from '../../styles/Todo.module.css';
 
-import TodoItem from "./TodoItem";
+import TodoItem from './TodoItem';
 
 export default function TodoList({
   todos,
@@ -11,7 +11,7 @@ export default function TodoList({
   return (
     <div className={styles.listContent}>
       <ul>
-        {todos.map((todo) => (
+        {todos.map(todo => (
           <li className={styles.itemContent} key={todo.id}>
             <TodoItem
               todo={todo}

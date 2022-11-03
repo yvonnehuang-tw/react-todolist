@@ -1,6 +1,6 @@
-import { Modal, Button, Row, Col, Form } from "react-bootstrap";
+import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const initialNewUserData = {
   firstName: null,
@@ -66,8 +66,10 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
                 autoComplete="new-password"
                 // style={{ borderColor: newUserData.firstName === "" ? "red" : "#ced4da" }}
                 isValid={!!newUserData.firstName}
-                isInvalid={newUserData.firstName === ""}
-                onChange={(e) => handleChangeUserData("firstName", e.target.value)}
+                isInvalid={newUserData.firstName === ''}
+                onChange={e =>
+                  handleChangeUserData('firstName', e.target.value)
+                }
               />
             </Form.Group>
 
@@ -81,8 +83,8 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
                 autoComplete="new-password"
                 // style={{ borderColor: newUserData.lastName === "" ? "red" : "#ced4da" }}
                 isValid={!!newUserData.lastName}
-                isInvalid={newUserData.lastName === ""}
-                onChange={(e) => handleChangeUserData("lastName", e.target.value)}
+                isInvalid={newUserData.lastName === ''}
+                onChange={e => handleChangeUserData('lastName', e.target.value)}
               />
             </Form.Group>
           </Row>
@@ -101,11 +103,13 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
                 /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(newUserData.email)
               }
               isInvalid={
-                newUserData.email === "" ||
+                newUserData.email === '' ||
                 (newUserData.email &&
-                  !/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(newUserData.email))
+                  !/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(
+                    newUserData.email
+                  ))
               }
-              onChange={(e) => handleChangeUserData("email", e.target.value)}
+              onChange={e => handleChangeUserData('email', e.target.value)}
             />
           </Form.Group>
 
@@ -119,8 +123,8 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               autoComplete="new-password"
               // style={{ borderColor: newUserData.job === "" ? "red" : "#ced4da" }}
               isValid={!!newUserData.job}
-              isInvalid={newUserData.job === ""}
-              onChange={(e) => handleChangeUserData("job", e.target.value)}
+              isInvalid={newUserData.job === ''}
+              onChange={e => handleChangeUserData('job', e.target.value)}
             />
           </Form.Group>
 
@@ -134,8 +138,8 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               autoComplete="new-password"
               // style={{ borderColor: newUserData.address === "" ? "red" : "#ced4da" }}
               isValid={!!newUserData.address}
-              isInvalid={newUserData.address === ""}
-              onChange={(e) => handleChangeUserData("address", e.target.value)}
+              isInvalid={newUserData.address === ''}
+              onChange={e => handleChangeUserData('address', e.target.value)}
             />
           </Form.Group>
 
@@ -149,8 +153,8 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
               autoComplete="new-password"
               // style={{ borderColor: newUserData.country === "" ? "red" : "#ced4da" }}
               isValid={!!newUserData.country}
-              isInvalid={newUserData.country === ""}
-              onChange={(e) => handleChangeUserData("country", e.target.value)}
+              isInvalid={newUserData.country === ''}
+              onChange={e => handleChangeUserData('country', e.target.value)}
             />
           </Form.Group>
         </Form>
