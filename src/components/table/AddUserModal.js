@@ -14,7 +14,7 @@ const initialNewUserData = {
 
 export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
   const [newUserData, setNewUserData] = useState(initialNewUserData);
-  const [savebtnDisabled, setSaveBtnDisabled] = useState(true);
+  const [saveBtnDisabled, setSaveBtnDisabled] = useState(true);
 
   const checkFormValid = useCallback(() => {
     const checkingFormValid = () => {
@@ -201,7 +201,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
           //     newUserData.country
           //   )
           // }
-          disabled={savebtnDisabled}
+          disabled={saveBtnDisabled}
           // disabled={checkFormValid()}
         >
           Save
