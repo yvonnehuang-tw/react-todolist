@@ -1,12 +1,16 @@
 import styles from '../../styles/Todo.module.css';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
 import EditTodoModal from './EditTodoModal';
 
 let nextId = 0;
 export default function TodoDemo() {
+  const { t } = useTranslation();
+
   const [todos, setTodos] = useState([]);
   const [errorMessageShow, setErrorMessageShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
@@ -67,7 +71,7 @@ export default function TodoDemo() {
 
   const ErrorMessage = () =>
     errorMessageShow && (
-      <div className={styles.errorMessage}>Input is required.</div>
+      <div className={styles.errorMessage}>{t('todolist.errorMessage')}</div>
     );
 
   return (

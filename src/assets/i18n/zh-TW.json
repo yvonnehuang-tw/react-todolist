@@ -1,0 +1,51 @@
+{
+  "common": {
+    "footer": "2022 Yvonne Huang 版權所有。",
+    "title": "React 作品",
+    "errorPageTitle": "糟糕！",
+    "errorPageContent": "抱歉，發生了意外錯誤。"
+  },
+  "todolist": {
+    "title": "練習：待辦事項",
+    "addBtn": "新增按鈕",
+    "addPlaceHolder": "輸入待辦事項...",
+    "editBtn": "編輯按鈕",
+    "deleteBtn": "刪除按鈕",
+    "errorMessage": "這是必填欄位！",
+    "edit": "編輯",
+    "editTitle": "請輸入您的待辦事項新內容。",
+    "close": "關閉",
+    "save": "更新"
+  },
+  "table": {
+    "titleUseState": "練習：useState",
+    "titleUseReducer": "練習：useReducer",
+    "tableTitle": "使用者資訊",
+    "add": "新增",
+    "delete": "刪除",
+    "search": "搜尋...",
+    "tableName": "名稱",
+    "tableEmail": "信箱",
+    "tableJob": "職業",
+    "tableAddress": "地址",
+    "tableCountry": "國家",
+    "formAddUser": "新增使用者",
+    "formFirstName": "名字",
+    "formLastName": "姓氏",
+    "formEmail": "信箱",
+    "formJob": "職業",
+    "formAddress": "地址",
+    "formCountry": "國家",
+    "placeHolderFirstName": "請輸入您的名字",
+    "placeHolderLastName": "請輸入您的姓氏",
+    "placeHolderEmail": "請輸入您的信箱",
+    "placeHolderJob": "請輸入您的職業",
+    "placeHolderAddress": "請輸入您的地址",
+    "placeHolderCountry": "請輸入您的國家",
+    "close": "關閉",
+    "save": "儲存",
+    "deleteMessage": "您想要刪除選擇的項目嗎？",
+    "no": "不要",
+    "yes": "是的"
+  }
+}

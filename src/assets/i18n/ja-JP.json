@@ -1,0 +1,51 @@
+{
+  "common": {
+    "footer": "2022 Yvonne Huangの版権所有。",
+    "title": "React デモ",
+    "errorPageTitle": "おっと!",
+    "errorPageContent": "申し訳ありませんが、予期しないエラーが発生しました。"
+  },
+  "todolist": {
+    "title": "ToDoリスト",
+    "addBtn": "ボタンを追加",
+    "addPlaceHolder": "ToDoを入力してください...",
+    "editBtn": "編集ボタン",
+    "deleteBtn": "削除ボタン",
+    "errorMessage": "必須項目です。",
+    "edit": "編集",
+    "editTitle": "todoを変更するには入力してください。",
+    "close": "閉じる",
+    "save": "変更内容を保存"
+  },
+  "table": {
+    "titleUseState": "useStateを使用するテーブル",
+    "titleUseReducer": "useReducerを使用するテーブル",
+    "tableTitle": "ユーザー情報",
+    "add": "追加",
+    "delete": "削除",
+    "search": "検索...",
+    "tableName": "名前",
+    "tableEmail": "Eメール",
+    "tableJob": "仕事",
+    "tableAddress": "住所",
+    "tableCountry": "国",
+    "formAddUser": "ユーザーを追加する",
+    "formFirstName": "名前",
+    "formLastName": "姓",
+    "formEmail": "Eメール",
+    "formJob": "仕事",
+    "formAddress": "住所",
+    "formCountry": "国",
+    "placeHolderFirstName": "名前を入力してください",
+    "placeHolderLastName": "姓を入力してください",
+    "placeHolderEmail": "メールアドレスを入力してください",
+    "placeHolderJob": "仕事を入力してください",
+    "placeHolderAddress": "住所を入力してください",
+    "placeHolderCountry": "国を入力してください",
+    "close": "閉じる",
+    "save": "保存",
+    "deleteMessage": "選択したものを削除しますか?",
+    "no": "いいえ",
+    "yes": "はい"
+  }
+}

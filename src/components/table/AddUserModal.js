@@ -1,6 +1,7 @@
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const initialNewUserData = {
   firstName: null,
@@ -13,6 +14,8 @@ const initialNewUserData = {
 };
 
 export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
+  const { t } = useTranslation();
+
   const [newUserData, setNewUserData] = useState(initialNewUserData);
   const [saveBtnDisabled, setSaveBtnDisabled] = useState(true);
 
@@ -75,18 +78,18 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
   return (
     <Modal centered show={modalShow} onHide={handleClickCloseBtn}>
       <Modal.Header closeButton>
-        <Modal.Title>Add user</Modal.Title>
+        <Modal.Title>{t('table.formAddUser')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Row className="mb-3">
             {/* First Name */}
             <Form.Group as={Col} controlId="formUserFirstName">
-              <Form.Label>First name</Form.Label>
+              <Form.Label>{t('table.formFirstName')}</Form.Label>
               <Form.Control
                 size="sm"
                 type="text"
-                placeholder="Enter first name"
+                placeholder={t('table.placeHolderFirstName')}
                 autoComplete="new-password"
                 // style={{ borderColor: newUserData.firstName === "" ? "red" : "#ced4da" }}
                 isValid={!!newUserData.firstName}
@@ -99,11 +102,11 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
 
             {/* Last Name */}
             <Form.Group as={Col} controlId="formUserLastName">
-              <Form.Label>Last name</Form.Label>
+              <Form.Label>{t('table.formLastName')}</Form.Label>
               <Form.Control
                 size="sm"
                 type="text"
-                placeholder="Enter last name"
+                placeholder={t('table.placeHolderLastName')}
                 autoComplete="new-password"
                 // style={{ borderColor: newUserData.lastName === "" ? "red" : "#ced4da" }}
                 isValid={!!newUserData.lastName}
@@ -115,11 +118,11 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
 
           {/* E-mail */}
           <Form.Group className="mb-3" controlId="formUserEmail">
-            <Form.Label>E-mail</Form.Label>
+            <Form.Label>{t('table.formEmail')}</Form.Label>
             <Form.Control
               size="sm"
               type="email"
-              placeholder="Enter email"
+              placeholder={t('table.placeHolderEmail')}
               autoComplete="new-password"
               // style={{ borderColor: newUserData.email === "" ? "red" : "#ced4da" }}
               isValid={
@@ -139,11 +142,11 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
 
           {/* Job */}
           <Form.Group className="mb-3" controlId="formUserJob">
-            <Form.Label>Job</Form.Label>
+            <Form.Label>{t('table.formJob')}</Form.Label>
             <Form.Control
               size="sm"
               type="text"
-              placeholder="Enter job"
+              placeholder={t('table.placeHolderJob')}
               autoComplete="new-password"
               // style={{ borderColor: newUserData.job === "" ? "red" : "#ced4da" }}
               isValid={!!newUserData.job}
@@ -154,11 +157,11 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
 
           {/* Address */}
           <Form.Group className="mb-3" controlId="formUserAddress">
-            <Form.Label>Address</Form.Label>
+            <Form.Label>{t('table.formAddress')}</Form.Label>
             <Form.Control
               size="sm"
               type="text"
-              placeholder="Enter address"
+              placeholder={t('table.placeHolderAddress')}
               autoComplete="new-password"
               // style={{ borderColor: newUserData.address === "" ? "red" : "#ced4da" }}
               isValid={!!newUserData.address}
@@ -169,11 +172,11 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
 
           {/* Country */}
           <Form.Group className="mb-3" controlId="formUserCountry">
-            <Form.Label>Country</Form.Label>
+            <Form.Label>{t('table.formCountry')}</Form.Label>
             <Form.Control
               size="sm"
               type="text"
-              placeholder="Enter country"
+              placeholder={t('table.placeHolderCountry')}
               autoComplete="new-password"
               // style={{ borderColor: newUserData.country === "" ? "red" : "#ced4da" }}
               isValid={!!newUserData.country}
@@ -185,7 +188,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClickCloseBtn}>
-          Close
+          {t('table.close')}
         </Button>
         <Button
           variant="primary"
@@ -204,7 +207,7 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
           disabled={saveBtnDisabled}
           // disabled={checkFormValid()}
         >
-          Save
+          {t('table.save')}
         </Button>
       </Modal.Footer>
     </Modal>

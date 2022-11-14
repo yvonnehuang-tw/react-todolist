@@ -1,0 +1,51 @@
+{
+  "common": {
+    "footer": "2022 Yvonne Huang. All rights reserved.",
+    "title": "React Demo",
+    "errorPageTitle": "Oops!",
+    "errorPageContent": "Sorry, an unexpected error has occurred."
+  },
+  "todolist": {
+    "title": "TodoList",
+    "addBtn": "Add button",
+    "addPlaceHolder": "Enter a todo...",
+    "editBtn": "Edit button",
+    "deleteBtn": "Delete button",
+    "errorMessage": "This field is required.",
+    "edit": "Edit",
+    "editTitle": "Please enter to change your todo.",
+    "close": "Close",
+    "save": "Save Changes"
+  },
+  "table": {
+    "titleUseState": "Table using useState",
+    "titleUseReducer": "Table using useReducer",
+    "tableTitle": "User Info",
+    "add": "Add",
+    "delete": "Delete",
+    "search": "Search...",
+    "tableName": "Name",
+    "tableEmail": "E-mail",
+    "tableJob": "Job",
+    "tableAddress": "Address",
+    "tableCountry": "Country",
+    "formAddUser": "Add user",
+    "formFirstName": "First name",
+    "formLastName": "Last name",
+    "formEmail": "E-mail",
+    "formJob": "Job",
+    "formAddress": "Address",
+    "formCountry": "Country",
+    "placeHolderFirstName": "Enter first name",
+    "placeHolderLastName": "Enter last name",
+    "placeHolderEmail": "Enter email",
+    "placeHolderJob": "Enter job",
+    "placeHolderAddress": "Enter address",
+    "placeHolderCountry": "Enter country",
+    "close": "Close",
+    "save": "Save",
+    "deleteMessage": "Would you like to delete selected?",
+    "no": "No",
+    "yes": "Yes"
+  }
+}

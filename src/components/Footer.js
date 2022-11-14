@@ -1,7 +1,11 @@
+import { useTranslation } from 'react-i18next';
+
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="footer">
-      &copy; 2022 Yvonne Huang. All rights reserved.
+      &copy; {t('common.footer')}
     </footer>
   );
 }

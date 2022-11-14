@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import CustomButton from '../common/CustomButton';
 
 export default function TodoItem({
@@ -6,6 +8,8 @@ export default function TodoItem({
   onOpenEditModal,
   onDeleteTodo,
 }) {
+  const { t } = useTranslation();
+
   return (
     <>
       <span
@@ -17,13 +21,13 @@ export default function TodoItem({
         {todo.value}
       </span>
       <CustomButton
-        title={'Edit button'}
+        title={t('todolist.editBtn')}
         icon={'icon-pencil'}
         hoverBgColor={'rgba(0 , 150, 136, 1'}
         onClick={() => onOpenEditModal(todo)}
       />
       <CustomButton
-        title={'Delete button'}
+        title={t('todolist.deleteBtn')}
         icon={'icon-trash'}
         hoverBgColor={'rgba(255, 75, 104, 1)'}
         onClick={() => onDeleteTodo(todo.id)}

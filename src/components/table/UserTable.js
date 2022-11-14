@@ -1,12 +1,15 @@
 import { Table } from 'react-bootstrap';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function UserTable({
   userData,
   onTableCheckedAll,
   onChangeDeleteBtnDisable,
 }) {
+  const { t } = useTranslation();
+
   const [isCheckedAll, setIsCheckedAll] = useState(false);
 
   const handleTableCheckedAll = tmpChecked => {
@@ -45,11 +48,11 @@ export default function UserTable({
             />
           </th>
           <th style={{ width: 40, textAlign: 'center' }}>#</th>
-          <th>Name</th>
-          <th>E-mail</th>
-          <th>Job</th>
-          <th>Address</th>
-          <th>Country</th>
+          <th>{t('table.tableName')}</th>
+          <th>{t('table.tableEmail')}</th>
+          <th>{t('table.tableJob')}</th>
+          <th>{t('table.tableAddress')}</th>
+          <th>{t('table.tableCountry')}</th>
         </tr>
       </thead>
       <tbody>

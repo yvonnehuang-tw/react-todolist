@@ -5,8 +5,8 @@ export default function CustomButton(props) {
 
   const [isHover, setIsHover] = useState(false);
 
-  const tmpBgColor = bgColor ? bgColor : "rgba(44, 54, 63, 1)";
-  const tmpHoverBgColor = hoverBgColor ? hoverBgColor : "rgba(44, 54, 63, 1)";
+  const tmpBgColor = bgColor ? bgColor : "rgba(33, 37, 41, 1)";
+  const tmpHoverBgColor = hoverBgColor ? hoverBgColor : "rgba(33, 37, 41, 1)";
   const tmpColor = color ? color : "#ffffff";
   const btnStyle = {
     border: "none",

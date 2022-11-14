@@ -1,5 +1,7 @@
 import { Modal, Button } from 'react-bootstrap';
 
+import { useTranslation } from 'react-i18next';
+
 export default function EditTodoModal({
   todoContent,
   editModalShow,
@@ -7,6 +9,8 @@ export default function EditTodoModal({
   onCloseEditModal,
   onSaveChangeTodo,
 }) {
+  const { t } = useTranslation();
+
   const handleCloseBtn = () => {
     onCloseEditModal();
   };
@@ -22,10 +26,10 @@ export default function EditTodoModal({
   return (
     <Modal centered show={editModalShow} onHide={handleCloseBtn}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit</Modal.Title>
+        <Modal.Title>{t('todolist.edit')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Please enter to change your todo.</p>
+        <p>{t('todolist.editTitle')}</p>
         <input
           type="text"
           style={{
@@ -40,10 +44,10 @@ export default function EditTodoModal({
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseBtn}>
-          Close
+          {t('todolist.close')}
         </Button>
         <Button variant="primary" onClick={handleSaveBtn}>
-          Save Changes
+          {t('todolist.save')}
         </Button>
       </Modal.Footer>
     </Modal>

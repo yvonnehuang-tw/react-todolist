@@ -1,18 +1,22 @@
 import { Modal, Button } from 'react-bootstrap';
 
+import { useTranslation } from 'react-i18next';
+
 export default function DeleteUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
+  const { t } = useTranslation();
+
   return (
     <Modal centered show={modalShow} onHide={onCloseBtn}>
       <Modal.Header closeButton>
-        <Modal.Title>Delete</Modal.Title>
+        <Modal.Title>{t('table.delete')}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Would you like to delete selected?</Modal.Body>
+      <Modal.Body>{t('table.deleteMessage')}</Modal.Body>
       <Modal.Footer>
         <Button variant="outline-secondary" onClick={onCloseBtn}>
-          No
+          {t('table.no')}
         </Button>
         <Button variant="danger" onClick={onSaveBtn}>
-          Yes
+          {t('table.yes')}
         </Button>
       </Modal.Footer>
     </Modal>

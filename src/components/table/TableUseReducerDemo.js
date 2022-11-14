@@ -2,6 +2,8 @@ import styles from '../../styles/Table.module.css';
 import { Button } from 'react-bootstrap';
 
 import { useEffect, useState, useReducer, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import reducer from '../../reducer/reducer';
 import Loading from '../common/Loading';
 import UserTable from './UserTable';
@@ -10,6 +12,8 @@ import DeleteUserModal from './DeleteUserModal';
 
 const URL = process.env.REACT_APP_BASE_URL;
 export default function TableUseReducerDemo() {
+  const { t } = useTranslation();
+
   const [state, dispatch] = useReducer(reducer, {
     loadingStatus: false,
     userData: [],
@@ -171,29 +175,41 @@ export default function TableUseReducerDemo() {
       <div className={styles.tableContainer}>
         {state.loadingStatus && <Loading />}
 
-        <h3>User Info</h3>
+        <h3>{t('table.tableTitle')}</h3>
         <hr className="forHR" />
 
         <div className={styles.toolbarBox}>
           <div className={styles.toolbarBoxLeft}>
             <Button variant="primary" onClick={handleClickAddBtn}>
-              Add
+              {t('table.add')}
             </Button>
             <Button
               variant="secondary"
               onClick={handleClickDeleteBtn}
               disabled={deleteBtnDisable}
             >
-              Delete
+              {t('table.delete')}
             </Button>
           </div>
           <div className={styles.toolbarBoxRight}>
             <input
               type="text"
-              placeholder="&#xF002; Search..."
+              placeholder={`     ${t('table.search')}`}
               onChange={handleSearchData}
               onKeyUp={handleSearchData}
             />
+            <i
+              className="icon-search"
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                left: -190,
+                top: 10,
+                color: '#7B7B7B',
+                cursor: 'pointer',
+                width: 0,
+              }}
+            ></i>
           </div>
         </div>
 

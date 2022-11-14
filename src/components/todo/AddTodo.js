@@ -1,9 +1,13 @@
 import styles from '../../styles/Todo.module.css';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import CustomButton from '../common/CustomButton';
 
 export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
+  const { t } = useTranslation();
+
   const [inputValue, setInputValue] = useState('');
 
   const handleChangeInputValue = event => {
@@ -29,13 +33,13 @@ export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
     >
       <input
         type="text"
-        placeholder="Enter a todo..."
+        placeholder={t('todolist.addPlaceHolder')}
         value={inputValue}
         onChange={e => handleChangeInputValue(e)}
         onKeyUp={e => handleClickAddBtn(e)}
       />
       <CustomButton
-        title="Add button"
+        title={t('todolist.addBtn')}
         icon="icon-plus"
         hoverBgColor={'rgba(17, 141, 240, 1)'}
         onClick={e => handleClickAddBtn(e)}
