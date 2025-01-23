@@ -3,11 +3,11 @@ import { Table } from 'react-bootstrap';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function UserTable({
+const UserTable = ({
   userData,
   onTableCheckedAll,
   onChangeDeleteBtnDisable,
-}) {
+}) => {
   const { t } = useTranslation();
 
   const [isCheckedAll, setIsCheckedAll] = useState(false);
@@ -81,3 +81,5 @@ export default function UserTable({
     </Table>
   );
 }
+
+export default UserTable;

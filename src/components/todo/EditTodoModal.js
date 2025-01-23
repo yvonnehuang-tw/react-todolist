@@ -2,13 +2,13 @@ import { Modal, Button } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
 
-export default function EditTodoModal({
+const EditTodoModal = ({
   todoContent,
   editModalShow,
   onChangeTodo,
   onCloseEditModal,
   onSaveChangeTodo,
-}) {
+}) => {
   const { t } = useTranslation();
 
   const handleCloseBtn = () => {
@@ -53,3 +53,5 @@ export default function EditTodoModal({
     </Modal>
   );
 }
+
+export default EditTodoModal;

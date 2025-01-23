@@ -13,7 +13,7 @@ const initialNewUserData = {
   checked: false,
 };
 
-export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
+const AddUserModal = ({ modalShow, onCloseBtn, onSaveBtn }) => {
   const { t } = useTranslation();
 
   const [newUserData, setNewUserData] = useState(initialNewUserData);
@@ -213,3 +213,5 @@ export default function AddUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
     </Modal>
   );
 }
+
+export default AddUserModal;

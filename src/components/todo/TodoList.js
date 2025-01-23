@@ -2,12 +2,12 @@ import styles from '../../styles/Todo.module.css';
 
 import TodoItem from './TodoItem';
 
-export default function TodoList({
+const TodoList = ({
   todos,
   onClickDoneTodo,
   onOpenEditModal,
   onDeleteTodo,
-}) {
+}) => {
   return (
     <div className={styles.listContent}>
       <ul>
@@ -25,3 +25,5 @@ export default function TodoList({
     </div>
   );
 }
+
+export default TodoList;

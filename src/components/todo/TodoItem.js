@@ -2,12 +2,12 @@ import { useTranslation } from 'react-i18next';
 
 import CustomButton from '../common/CustomButton';
 
-export default function TodoItem({
+const TodoItem = ({
   todo,
   onClickDoneTodo,
   onOpenEditModal,
   onDeleteTodo,
-}) {
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -35,3 +35,5 @@ export default function TodoItem({
     </>
   );
 }
+
+export default TodoItem;

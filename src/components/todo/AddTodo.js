@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import CustomButton from '../common/CustomButton';
 
-export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
+const AddTodo = ({ onAddTodo, onErrorMessage, errorMessage }) => {
   const { t } = useTranslation();
 
   const [inputValue, setInputValue] = useState('');
@@ -47,3 +47,5 @@ export default function AddTodo({ onAddTodo, onErrorMessage, errorMessage }) {
     </div>
   );
 }
+
+export default AddTodo;

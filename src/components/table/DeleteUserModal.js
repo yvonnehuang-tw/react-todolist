@@ -2,7 +2,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
 
-export default function DeleteUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
+const DeleteUserModal = ({ modalShow, onCloseBtn, onSaveBtn }) => {
   const { t } = useTranslation();
 
   return (
@@ -22,3 +22,5 @@ export default function DeleteUserModal({ modalShow, onCloseBtn, onSaveBtn }) {
     </Modal>
   );
 }
+
+export default DeleteUserModal;

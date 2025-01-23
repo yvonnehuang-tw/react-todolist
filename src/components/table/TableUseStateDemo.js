@@ -10,7 +10,8 @@ import AddUserModal from './AddUserModal';
 import DeleteUserModal from './DeleteUserModal';
 
 const URL = process.env.REACT_APP_BASE_URL;
-export default function TableUseStateDemo() {
+
+const TableUseStateDemo = () => {
   const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
@@ -217,3 +218,5 @@ export default function TableUseStateDemo() {
     </div>
   );
 }
+
+export default TableUseStateDemo;

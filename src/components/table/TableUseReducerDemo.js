@@ -11,7 +11,8 @@ import AddUserModal from './AddUserModal';
 import DeleteUserModal from './DeleteUserModal';
 
 const URL = process.env.REACT_APP_BASE_URL;
-export default function TableUseReducerDemo() {
+
+const TableUseReducerDemo = () =>{
   const { t } = useTranslation();
 
   const [state, dispatch] = useReducer(reducer, {
@@ -234,3 +235,5 @@ export default function TableUseReducerDemo() {
     </div>
   );
 }
+
+export default TableUseReducerDemo;

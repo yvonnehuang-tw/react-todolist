@@ -2,7 +2,7 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 
-export default function Root() {
+const Root = () => {
   return (
     <>
       <Header />
@@ -11,3 +11,5 @@ export default function Root() {
     </>
   );
 }
+
+export default Root;

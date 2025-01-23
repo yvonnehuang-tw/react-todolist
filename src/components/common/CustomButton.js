@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CustomButton(props) {
+const CustomButton = (props) => {
   const { title, bgColor, hoverBgColor, color, icon, name, onClick } = props;
 
   const [isHover, setIsHover] = useState(false);
@@ -39,3 +39,5 @@ export default function CustomButton(props) {
     </button>
   );
 }
+
+export default CustomButton;

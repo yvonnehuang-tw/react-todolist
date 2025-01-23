@@ -8,7 +8,7 @@ import TodoList from './TodoList';
 import EditTodoModal from './EditTodoModal';
 
 let nextId = 0;
-export default function TodoDemo() {
+const TodoDemo = () => {
   const { t } = useTranslation();
 
   const [todos, setTodos] = useState([]);
@@ -100,3 +100,5 @@ export default function TodoDemo() {
     </div>
   );
 }
+
+export default TodoDemo;
